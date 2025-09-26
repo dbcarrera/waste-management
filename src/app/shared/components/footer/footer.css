@@ -1,0 +1,31 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 16px 16px;
+
+  border-top: 1px solid #d2d8d3;
+  margin-top: auto;
+
+  background-color: white;
+
+  /* Rounded corners on the top */
+  border-top-left-radius: 0.375rem;
+  border-top-right-radius: 0.375rem;
+}
+
+/* Container for all social links if more are added */
+.social-links {
+  display: flex;
+  gap: 16px;
+}
+
+/* Make social links move up on hover */
+.social-link {
+  transition: all 0.2s ease;
+}
+
+.social-link:hover {
+  transform: translateY(-1px);
+}
