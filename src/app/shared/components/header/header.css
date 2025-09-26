@@ -1,0 +1,40 @@
+.header {
+  /* Frosted Glass */
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+  padding: 10px 0;
+
+  width: 100%;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  /* Ensure on top */
+  z-index: 99;
+
+  /* Rounded bottom corners */
+  border-bottom-right-radius: 0.375rem;
+  border-bottom-left-radius: 0.375rem;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 64px;
+  height: 64px;
+}
+
+.app-title {
+  color: black;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
