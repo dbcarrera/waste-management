@@ -11,3 +11,8 @@ body {
   /* Remove default margin for better looks */
   margin: 0;
 }
+
+/* Color variables */
+:root {
+  --color-brand: oklch(0.4737 0.0783 173.51);
+}
