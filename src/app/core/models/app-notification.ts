@@ -3,6 +3,6 @@ export interface AppNotification {
   title: string;
   message: string;
   priority: 'low' | 'medium' | 'high';
-  community: string | null;
+  communityId: string | null;
   completed: Date | null;
 }
