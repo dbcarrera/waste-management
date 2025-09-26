@@ -1,4 +1,5 @@
 export interface StatisticsReport {
+  created: string;
   pickupsByType: {
     paper: number;
     glass: number;

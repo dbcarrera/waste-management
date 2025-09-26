@@ -1,6 +1,6 @@
 export interface Community {
   id: string;
   name: string;
-  created: Date;
+  created: string;
   location: string;
 }

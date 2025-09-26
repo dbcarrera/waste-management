@@ -1,8 +1,8 @@
 export interface AppNotification {
-  date: Date;
+  date: string;
   title: string;
   message: string;
   priority: 'low' | 'medium' | 'high';
   communityId: string | null;
-  completed: Date | null;
+  completed: string | null;
 }
