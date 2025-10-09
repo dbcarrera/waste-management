@@ -4,9 +4,8 @@ import { Login } from './features/auth/pages/login/login';
 import { ReportIssuesComponent } from './features/Report_issues/report_issues';
 
 export const routes: Routes = [
-  { path: 'signup', component: Signup },
   { path: '', redirectTo: 'signup', pathMatch: 'full' },
+  { path: 'signup', component: Signup },
   { path: 'login', component: Login },
-   { path: 'report_issues', component: ReportIssuesComponent }
+  { path: 'report-issues', component: ReportIssuesComponent },
 ];
-

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Pickups } from './pickups';
+import { Pickups } from './pickup-history';
 
 describe('Pickups', () => {
   let component: Pickups;

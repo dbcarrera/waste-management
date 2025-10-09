@@ -2,20 +2,24 @@
   <h2>Report an Issue</h2>
 
   <form (ngSubmit)="submitIssue()" #issueForm="ngForm">
-    <label>Issue Type:</label>
-    <input type="text" name="type" [(ngModel)]="issue.type" placeholder="e.g. Garbage not collected" required>
-
-    <label>Description:</label>
-    <textarea name="description" [(ngModel)]="issue.description" placeholder="Describe the issue..." required></textarea>
-
-    <label>Location:</label>
-    <input type="text" name="location" [(ngModel)]="issue.location" placeholder="Enter location" required>
-
-    <label>Date:</label>
-    <input type="date" name="date" [(ngModel)]="issue.date" required>
+    <label for="desc">Issue Description:</label>
+    <textarea
+      id="desc"
+      name="desc"
+      [(ngModel)]="issueDescription"
+      placeholder="Describe the issue..."
+      required>
+    </textarea>
 
     <button type="submit">Submit</button>
   </form>
 
-  <p *ngIf="message" class="success">{{ message }}</p>
+  <p *ngIf="submitted" class="success-message">
+    ✅ Your issue has been reported!
+  </p>
+</div>
+<div class="navigate-container">
+  <button routerLink="/pickup-history" class="navigate-btn">
+    View Pickup History
+  </button>
 </div>
