@@ -1,0 +1,25 @@
+<div class="report-container">
+  <h2>Report an Issue</h2>
+
+  <form (ngSubmit)="submitIssue()" #issueForm="ngForm">
+    <label for="desc">Issue Description:</label>
+    <textarea
+      id="desc"
+      name="desc"
+      [(ngModel)]="issueDescription"
+      placeholder="Describe the issue..."
+      required>
+    </textarea>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <p *ngIf="submitted" class="success-message">
+    ✅ Your issue has been reported!
+  </p>
+</div>
+<div class="navigate-container">
+  <button routerLink="/pickup-history" class="navigate-btn">
+    View Pickup History
+  </button>
+</div>

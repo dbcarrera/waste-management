@@ -1,0 +1,261 @@
+.signup-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Hero section with background image */
+.hero-container {
+  position: relative;
+  min-height: 600px;
+  height: 70vh;
+  max-height: 800px;
+  overflow: hidden;
+}
+
+.hero-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 1;
+  filter: brightness(0.8);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.hero-main {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 48px;
+  align-items: center;
+  flex: 1;
+  padding: 40px 0;
+  min-height: 0; /* Allow flex child to shrink */
+}
+
+.hero-text {
+  color: white;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 0;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.auth-section {
+  display: flex;
+  justify-content: center;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  min-width: 300px;
+}
+
+.auth-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  margin: 0 0 24px 0;
+  text-align: center;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.form-group input {
+  padding: 12px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 16px;
+  backdrop-filter: blur(5px);
+  transition: all 0.2s ease;
+}
+
+.form-group input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #4ade80;
+  box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.1);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.forgot-password {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-size: 14px;
+  align-self: flex-end;
+  transition: color 0.2s ease;
+}
+
+.forgot-password:hover {
+  color: white;
+}
+
+.auth-switch {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+}
+
+.auth-link {
+  color: var(--color-brand);
+  filter: brightness(2);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.auth-link:hover {
+  color: var(--color-brand);
+  filter: brightness(2.2);
+}
+
+/* Features section with white background */
+.features-section {
+  background: white;
+}
+
+.features-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 24px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 48px;
+
+  /* Ensure centered, particularly for responsiveness */
+  justify-items: center;
+}
+
+@media (min-width: 640px) and (max-width: 768px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.cta-section {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.cta-subtitle {
+  color: #6b7280;
+  margin: 12px 0 0 0;
+  font-size: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-container {
+    min-height: 100vh;
+    height: 100vh;
+    max-height: none;
+  }
+
+  .hero-main {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .auth-card {
+    max-width: 100%;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-content,
+  .features-container {
+    padding: 0 16px;
+  }
+
+  .features-container {
+    padding: 40px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-main {
+    gap: 24px;
+    padding: 20px 0;
+  }
+
+  .auth-form {
+    gap: 16px;
+  }
+
+  .form-group input {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hero-container {
+    min-height: 500px;
+    height: 60vh;
+    max-height: 700px;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+  }
+
+  .hero-main {
+    gap: 32px;
+  }
+}
