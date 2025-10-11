@@ -1,26 +1,22 @@
 <div class="notifications-container">
   <h1>Notifications</h1>
-  
+
   @for (notification of notifications(); track notification.date) {
-    <app-card [class]="'notification-card ' + getPriorityClass(notification.priority)">
-      <div class="notification-header">
-        <h3>{{ notification.title }}</h3>
-        <span class="date">{{ notification.date | date:'medium' }}</span>
-      </div>
-      
-      <p class="message">{{ notification.message }}</p>
-      
-      @if (!notification.completed) {
-        <app-button text="Mark as Read" type="secondary" (click)="markAsCompleted(notification)" />
-      }
-      
-      @if (notification.completed) {
-        <span class="completed-text">Completed on {{ notification.completed | date:'medium' }}</span>
-      }
-    </app-card>
-  }
-  
-  @if (notifications().length === 0) {
-    <p class="no-notifications">No notifications to display</p>
+  <app-card [class]="'notification-card ' + getPriorityClass(notification.priority)">
+    <div class="notification-header">
+      <h3>{{ notification.title }}</h3>
+      <span class="date">{{ notification.date | date : 'medium' }}</span>
+    </div>
+
+    <p class="message">{{ notification.message }}</p>
+
+    @if (!notification.completed) {
+    <app-button text="Mark as Read" type="secondary" (click)="markAsCompleted(notification)" />
+    } @if (notification.completed) {
+    <span class="completed-text">Completed on {{ notification.completed | date : 'medium' }}</span>
+    }
+  </app-card>
+  } @if (notifications().length === 0) {
+  <p class="no-notifications">No notifications to display</p>
   }
 </div>
