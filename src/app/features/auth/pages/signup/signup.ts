@@ -23,11 +23,13 @@ export class Signup {
 
   onSignup() {
     console.log('Signup attempt with:', this.email);
-    // Add signup logic here
+    // TOOD: Add signup logic here
   }
 
-  onLogin() {
-    console.log('Navigate to login');
-    // Add navigation to login page
+  scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   }
 }

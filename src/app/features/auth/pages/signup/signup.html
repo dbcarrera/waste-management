@@ -1,11 +1,11 @@
 <div class="signup-page">
+  <app-header></app-header>
+
   <!-- Hero section with background image -->
   <div class="hero-container">
     <img src="hero.jpg" alt="People sorting waste for recycling" class="hero-img" />
 
     <div class="hero-content">
-      <app-header></app-header>
-
       <main class="hero-main">
         <div class="hero-text">
           <h1 class="hero-title">Welcome to a<br />Greener Tomorrow</h1>
@@ -40,13 +40,11 @@
                 />
               </div>
 
-              <a href="#" class="forgot-password">Forgot Password?</a>
-
               <app-button text="Sign Up" type="primary" (click)="onSignup()"> </app-button>
 
               <div class="auth-switch">
                 <span>Already have an account?</span>
-                <a href="#" (click)="onLogin()" class="auth-link">Log In</a>
+                <a href="/login" class="auth-link">Log In</a>
               </div>
             </form>
           </app-frosted-card>
@@ -93,7 +91,11 @@
       </div>
 
       <div class="cta-section">
-        <app-button text="Join Our Community Today!" type="primary"></app-button>
+        <app-button
+          text="Join Our Community Today!"
+          (click)="scrollToTop()"
+          type="primary"
+        ></app-button>
         <p class="cta-subtitle">Start managing your waste smarter</p>
       </div>
     </div>

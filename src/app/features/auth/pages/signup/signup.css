@@ -117,18 +117,6 @@
   background: rgba(255, 255, 255, 0.15);
 }
 
-.forgot-password {
-  color: rgba(255, 255, 255, 0.8);
-  text-decoration: none;
-  font-size: 14px;
-  align-self: flex-end;
-  transition: color 0.2s ease;
-}
-
-.forgot-password:hover {
-  color: white;
-}
-
 .auth-switch {
   display: flex;
   justify-content: center;
