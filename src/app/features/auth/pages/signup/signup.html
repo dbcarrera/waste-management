@@ -16,6 +16,12 @@
             <h2 class="auth-title">Sign Up</h2>
 
             <form class="auth-form" (ngSubmit)="onSignup()">
+              @if (errorMessage) {
+              <div class="error-message">
+                {{ errorMessage }}
+              </div>
+              }
+
               <div class="form-group">
                 <label for="email">Email</label>
                 <input
@@ -25,6 +31,7 @@
                   [(ngModel)]="email"
                   placeholder="Email"
                   required
+                  [disabled]="isLoading"
                 />
               </div>
 
@@ -35,12 +42,28 @@
                   id="password"
                   name="password"
                   [(ngModel)]="password"
-                  placeholder="Password"
+                  placeholder="Password (min. 6 characters)"
                   required
+                  [disabled]="isLoading"
                 />
               </div>
 
-              <app-button variant="primary" [type]="'submit'">Sign Up</app-button>
+              <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  [(ngModel)]="confirmPassword"
+                  placeholder="Confirm Password"
+                  required
+                  [disabled]="isLoading"
+                />
+              </div>
+
+              <app-button variant="primary" [type]="'submit'" [disabled]="isLoading">
+                {{ isLoading ? 'Signing up...' : 'Sign Up' }}
+              </app-button>
 
               <div class="auth-switch">
                 <span>Already have an account?</span>
