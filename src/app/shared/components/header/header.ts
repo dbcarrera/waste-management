@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { COMPANY_NAME } from '../../../constants/company.constants';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,5 +9,12 @@ import { COMPANY_NAME } from '../../../constants/company.constants';
   styleUrl: './header.css',
 })
 export class Header {
+  hasSpacer = input<boolean>(true);
   readonly companyName = COMPANY_NAME;
+
+  constructor(private router: Router) {}
+
+  redirectHome() {
+    this.router.navigate(['/']);
+  }
 }
