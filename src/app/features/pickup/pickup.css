@@ -79,19 +79,6 @@
   animation: shake 0.5s ease-in-out;
 }
 
-@keyframes shake {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-10px);
-  }
-  75% {
-    transform: translateX(10px);
-  }
-}
-
 .success-message {
   padding: 16px 20px;
   background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
