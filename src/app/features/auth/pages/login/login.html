@@ -5,6 +5,12 @@
     <h2 class="auth-title">Log In</h2>
 
     <form class="auth-form" (ngSubmit)="onLogin()">
+      @if (errorMessage) {
+      <div class="error-message">
+        {{ errorMessage }}
+      </div>
+      }
+
       <div class="form-group">
         <label for="email">Email</label>
         <input
@@ -14,6 +20,7 @@
           [(ngModel)]="email"
           placeholder="Email"
           required
+          [disabled]="isLoading"
         />
       </div>
 
@@ -26,14 +33,17 @@
           [(ngModel)]="password"
           placeholder="Password"
           required
+          [disabled]="isLoading"
         />
       </div>
 
-      <app-button variant="primary" [type]="'submit'">Log In</app-button>
+      <app-button variant="primary" [type]="'submit'" [disabled]="isLoading">
+        {{ isLoading ? 'Logging in...' : 'Log In' }}
+      </app-button>
 
       <div class="auth-switch">
         <span>Don't have an account yet?</span>
-        <a href="/" class="auth-link">Sign Up</a>
+        <a href="/signup" class="auth-link">Sign Up</a>
       </div>
     </form>
   </app-frosted-card>
