@@ -15,4 +15,5 @@ body {
 /* Color variables */
 :root {
   --color-brand: oklch(0.4737 0.0783 173.51);
+  --color-secondary: oklch(59.942% 0.08737 172.043);
 }
