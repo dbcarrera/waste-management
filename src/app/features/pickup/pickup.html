@@ -1,0 +1,108 @@
+<div class="pickup-page">
+  <main class="pickup-main">
+    <div class="pickup-container">
+      <div class="pickup-header">
+        <div class="header-icon">
+          <lucide-icon [img]="Recycle" size="48" color="white"></lucide-icon>
+        </div>
+        <h1>Schedule Waste Pickup</h1>
+        <p class="subtitle">Request a pickup for your recyclable or organic waste</p>
+      </div>
+
+      <div class="pickup-form-card">
+        <form class="pickup-form" (ngSubmit)="onCreatePickup()">
+          @if (errorMessage) {
+          <div class="error-message">
+            {{ errorMessage }}
+          </div>
+          } @if (successMessage) {
+          <div class="success-message">
+            {{ successMessage }}
+          </div>
+          }
+
+          <div class="form-group">
+            <label for="wasteType">
+              <lucide-icon [img]="Trash2" size="20"></lucide-icon>
+              Waste Type
+            </label>
+            <select
+              id="wasteType"
+              name="wasteType"
+              [(ngModel)]="wasteType"
+              required
+              [disabled]="isLoading"
+            >
+              <option value="plastic">♻️ Plastic</option>
+              <option value="paper">📄 Paper</option>
+              <option value="glass">🍾 Glass</option>
+              <option value="organic">🌱 Organic</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="location">
+              <lucide-icon [img]="MapPin" size="20"></lucide-icon>
+              Pickup Location
+            </label>
+            <input
+              type="text"
+              id="location"
+              name="location"
+              [(ngModel)]="location"
+              placeholder="Enter the full address (e.g., 123 Main St, Apt 4B)"
+              required
+              [disabled]="isLoading"
+            />
+          </div>
+
+          <div class="form-actions">
+            <app-button variant="primary" [type]="'submit'" [disabled]="isLoading">
+              {{ isLoading ? 'Creating Pickup...' : 'Schedule Pickup' }}
+            </app-button>
+          </div>
+        </form>
+      </div>
+
+      <div class="info-section">
+        <h2>Waste Collection Guidelines</h2>
+        <div class="guidelines-grid">
+          <div class="guideline-card plastic">
+            <div class="guideline-icon">
+              <lucide-icon [img]="Package" size="32" color="#3b82f6"></lucide-icon>
+            </div>
+            <h3>Plastic</h3>
+            <p>Clean bottles, containers, and packaging. Remove caps and labels when possible.</p>
+          </div>
+
+          <div class="guideline-card paper">
+            <div class="guideline-icon">
+              <lucide-icon [img]="Recycle" size="32" color="#f59e0b"></lucide-icon>
+            </div>
+            <h3>Paper</h3>
+            <p>
+              Newspapers, magazines, cardboard, and office paper. Keep dry and free from food
+              residue.
+            </p>
+          </div>
+
+          <div class="guideline-card glass">
+            <div class="guideline-icon">
+              <lucide-icon [img]="Wine" size="32" color="#10b981"></lucide-icon>
+            </div>
+            <h3>Glass</h3>
+            <p>Bottles and jars. Rinse clean and remove metal lids.</p>
+          </div>
+
+          <div class="guideline-card organic">
+            <div class="guideline-icon">
+              <lucide-icon [img]="LeafyGreen" size="32" color="#22c55e"></lucide-icon>
+            </div>
+            <h3>Organic</h3>
+            <p>Food scraps, yard waste, and compostable materials. Use compostable bags.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
