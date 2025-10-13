@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { Auth } from '../services/auth';
 
-export const authGuard: CanActivateFn = (_, state) => {
+export const authGuard: CanActivateFn = () => {
   const authService = inject(Auth);
   const router = inject(Router);
 
@@ -11,8 +11,6 @@ export const authGuard: CanActivateFn = (_, state) => {
   }
 
   // Redirect to landing if not authenticated
-  router.navigate(['/'], {
-    queryParams: { returnUrl: state.url },
-  });
+  router.navigate(['/']);
   return false;
 };
