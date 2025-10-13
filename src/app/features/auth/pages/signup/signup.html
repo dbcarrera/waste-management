@@ -40,7 +40,7 @@
                 />
               </div>
 
-              <app-button text="Sign Up" type="primary" (click)="onSignup()"> </app-button>
+              <app-button variant="primary" [type]="'submit'">Sign Up</app-button>
 
               <div class="auth-switch">
                 <span>Already have an account?</span>
@@ -91,11 +91,7 @@
       </div>
 
       <div class="cta-section">
-        <app-button
-          text="Join Our Community Today!"
-          (click)="scrollToTop()"
-          type="primary"
-        ></app-button>
+        <app-button (click)="scrollToTop()" variant="primary">Join Our Community Today!</app-button>
         <p class="cta-subtitle">Start managing your waste smarter</p>
       </div>
     </div>

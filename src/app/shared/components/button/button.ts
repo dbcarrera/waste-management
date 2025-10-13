@@ -7,13 +7,14 @@ import { Component, input, output } from '@angular/core';
   styleUrl: './button.css',
 })
 export class Button {
-  text = input<string>('');
-  type = input<'primary' | 'secondary'>('primary');
+  variant = input<'primary' | 'outline'>('primary');
   disabled = input<boolean>(false);
+  type = input<'button' | 'submit' | 'reset'>('button');
+
   click = output<void>();
 
   onClick() {
-    if (!this.disabled) {
+    if (!this.disabled()) {
       this.click.emit();
     }
   }
