@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component } from '@angular/core';
 import { COMPANY_NAME } from '../../../constants/company.constants';
 import { Router } from '@angular/router';
 
@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
   styleUrl: './header.css',
 })
 export class Header {
-  hasSpacer = input<boolean>(true);
   readonly companyName = COMPANY_NAME;
 
   constructor(private router: Router) {}

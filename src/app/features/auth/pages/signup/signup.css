@@ -1,3 +1,7 @@
+.spacer {
+  height: 64px;
+}
+
 .signup-page {
   display: flex;
   flex-direction: column;
