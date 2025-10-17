@@ -4,11 +4,13 @@ import { Login } from './features/auth/pages/login/login';
 import { Notifications } from './features/notifications/notifications';
 import { ReportIssuesComponent } from './features/Report_issues/report_issues';
 import { Pickup } from './features/pickup/pickup';
+import { Pickups } from './features/pickup-history/pickup-history';
+import { Dashboard } from './features/admin/pages/dashboard/dashboard';
 import { authGuard } from './shared/guards/auth-guard';
 import { noAuthGuard } from './shared/guards/no-auth-guard';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'signup', pathMatch: 'full' },
+  { path: '', redirectTo: 'pickup', pathMatch: 'full' },
   { path: 'signup', component: Signup, canActivate: [noAuthGuard] },
   { path: 'login', component: Login, canActivate: [noAuthGuard] },
   {
@@ -24,6 +26,16 @@ export const routes: Routes = [
   {
     path: 'pickup',
     component: Pickup,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'pickup-history',
+    component: Pickups,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'admin',
+    component: Dashboard,
     canActivate: [authGuard],
   },
 ];

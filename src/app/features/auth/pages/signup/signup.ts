@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Header } from '../../../../shared/components/header/header';
 import { FrostedCard } from '../../../../shared/components/frosted-card/frosted-card';
@@ -11,11 +11,12 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
-  imports: [FormsModule, Header, FrostedCard, Button, Card, Footer, LucideAngularModule],
+  imports: [FormsModule, FrostedCard, Button, Card, Footer, LucideAngularModule],
   templateUrl: './signup.html',
   styleUrl: './signup.css',
 })
 export class Signup {
+  private authService = inject(Auth);
   readonly CalendarCheck = CalendarCheck;
   readonly ChartColumn = ChartColumn;
   readonly Bell = Bell;
@@ -27,7 +28,7 @@ export class Signup {
   errorMessage: string = '';
   isLoading: boolean = false;
 
-  constructor(private authService: Auth, private router: Router) {}
+  constructor(private router: Router) {}
 
   async onSignup() {
     // Validation

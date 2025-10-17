@@ -1,24 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FrostedCard } from '../../../../shared/components/frosted-card/frosted-card';
 import { Button } from '../../../../shared/components/button/button';
 import { FormsModule } from '@angular/forms';
 import { Header } from '../../../../shared/components/header/header';
 import { Auth } from '../../../../shared/services/auth';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, FrostedCard, Button, Header],
+  imports: [FormsModule, FrostedCard, Button],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
 export class Login {
+  private authService = inject(Auth);
   email: string = '';
   password: string = '';
   errorMessage: string = '';
   isLoading: boolean = false;
 
-  constructor(private authService: Auth, private router: Router) {}
+  constructor(private router: Router) {}
 
   async onLogin() {
     if (!this.email || !this.password) {

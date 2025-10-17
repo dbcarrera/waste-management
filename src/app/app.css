@@ -1,0 +1,13 @@
+/* Main content with navigation */
+.main-with-nav {
+  margin-left: 240px;
+  min-height: 100vh;
+}
+
+/* Mobile: account for bottom navigation */
+@media (max-width: 768px) {
+  .main-with-nav {
+    margin-left: 0;
+    padding-bottom: 80px; /* Space for bottom nav */
+  }
+}
