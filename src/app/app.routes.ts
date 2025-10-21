@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { Signup } from './features/auth/pages/signup/signup';
 import { Login } from './features/auth/pages/login/login';
 import { Notifications } from './features/notifications/notifications';
-import { ReportIssuesComponent } from './features/Report_issues/report_issues';
+import { ReportIssues } from './features/report-issue/report-issues';
 import { Pickup } from './features/pickup/pickup';
 import { Pickups } from './features/pickup-history/pickup-history';
 import { Dashboard } from './features/admin/pages/dashboard/dashboard';
@@ -20,7 +20,7 @@ export const routes: Routes = [
   },
   {
     path: 'report-issues',
-    component: ReportIssuesComponent,
+    component: ReportIssues,
     canActivate: [authGuard],
   },
   {
