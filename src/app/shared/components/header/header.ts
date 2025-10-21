@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { COMPANY_NAME } from '../../../constants/company.constants';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,4 +10,10 @@ import { COMPANY_NAME } from '../../../constants/company.constants';
 })
 export class Header {
   readonly companyName = COMPANY_NAME;
+
+  constructor(private router: Router) {}
+
+  redirectHome() {
+    this.router.navigate(['/']);
+  }
 }

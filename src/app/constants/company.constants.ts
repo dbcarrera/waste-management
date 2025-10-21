@@ -1,1 +1,1 @@
-export const COMPANY_NAME = 'EcoCycle' as const;
+export const COMPANY_NAME = 'Community Waste Management System';

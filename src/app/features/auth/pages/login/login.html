@@ -1,1 +1,49 @@
-<p>login works!</p>
+<div class="auth-section">
+  <h1>Welcome Back</h1>
+  <app-frosted-card class="auth-card">
+    <h2 class="auth-title">Log In</h2>
+
+    <form class="auth-form" (ngSubmit)="onLogin()">
+      @if (errorMessage) {
+      <div class="error-message">
+        {{ errorMessage }}
+      </div>
+      }
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="email"
+          placeholder="Email"
+          required
+          [disabled]="isLoading"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="password"
+          placeholder="Password"
+          required
+          [disabled]="isLoading"
+        />
+      </div>
+
+      <app-button variant="primary" [type]="'submit'" [disabled]="isLoading">
+        {{ isLoading ? 'Logging in...' : 'Log In' }}
+      </app-button>
+
+      <div class="auth-switch">
+        <span>Don't have an account yet?</span>
+        <a href="/signup" class="auth-link">Sign Up</a>
+      </div>
+    </form>
+  </app-frosted-card>
+</div>

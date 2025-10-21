@@ -1,1 +1,22 @@
-<p>notifications works!</p>
+<div class="notifications-container">
+  <h1>Notifications</h1>
+
+  @for (notification of notifications(); track notification.date) {
+  <div [class]="'notification-card ' + `priority-${notification.priority}`">
+    <div class="notification-header">
+      <h3>{{ notification.title }}</h3>
+      <span class="date">{{ notification.date | date : 'medium' }}</span>
+    </div>
+
+    <p class="message">{{ notification.message }}</p>
+
+    @if (!notification.completed) {
+    <app-button variant="outline" (click)="markAsCompleted(notification)">Mark as Read</app-button>
+    } @if (notification.completed) {
+    <span class="completed-text">Completed on {{ notification.completed | date : 'medium' }}</span>
+    }
+  </div>
+  } @if (notifications().length === 0) {
+  <p class="no-notifications">No notifications to display</p>
+  }
+</div>

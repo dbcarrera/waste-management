@@ -1,3 +1,20 @@
+<<<<<<< HEAD
+<h1>Welcome to Waste Management System</h1>
+<router-outlet></router-outlet>
+=======
+<!-- Header for unauthenticated layouts (signup/login) -->
+@if (!isAuthenticated()) {
+<app-header />
 <main>
   <router-outlet />
 </main>
+}
+
+<!-- Nav rail/bottom nav bar for authenticated views -->
+@if (isAuthenticated()) {
+<app-navigation />
+<main class="main-with-nav">
+  <router-outlet />
+</main>
+}
+>>>>>>> e9af9778d307232c639114911f1dfc5e243f7fc1
