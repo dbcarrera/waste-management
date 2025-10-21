@@ -1,0 +1,340 @@
+.pickup-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.pickup-main {
+  flex: 1;
+  padding: 60px 24px;
+}
+
+.pickup-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Header Section */
+.pickup-header {
+  text-align: center;
+  margin-bottom: 50px;
+  animation: fadeIn 0.6s ease-out;
+}
+
+.header-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 96px;
+  background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-secondary) 100%);
+  border-radius: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 20px 40px rgba(74, 222, 128, 0.4);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.pickup-header h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #1f2937;
+  margin: 0 0 16px 0;
+  letter-spacing: -0.02em;
+}
+
+.pickup-header .subtitle {
+  font-size: 1.25rem;
+  color: #6b7280;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Form Card */
+.pickup-form-card {
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  margin-bottom: 60px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(74, 222, 128, 0.2);
+  animation: slideUp 0.6s ease-out;
+}
+
+.pickup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.error-message {
+  padding: 16px 20px;
+  background-color: #fef2f2;
+  border: 2px solid #fecaca;
+  border-radius: 12px;
+  color: #dc2626;
+  font-size: 15px;
+  text-align: center;
+  font-weight: 500;
+  animation: shake 0.5s ease-in-out;
+}
+
+.success-message {
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border: 2px solid #bbf7d0;
+  border-radius: 12px;
+  color: #16a34a;
+  font-size: 15px;
+  text-align: center;
+  font-weight: 500;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-group label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #1f2937;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.form-group input,
+.form-group select {
+  padding: 16px 20px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  background: #f9fafb;
+  color: #1f2937;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.form-group input::placeholder {
+  color: #9ca3af;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--color-brand);
+  background: white;
+  box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.1);
+  transform: translateY(-2px);
+}
+
+.form-group input:disabled,
+.form-group select:disabled {
+  background-color: #f3f4f6;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-group select {
+  cursor: pointer;
+}
+
+.form-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.form-actions app-button {
+  flex: 1;
+}
+
+/* Info Section */
+.info-section {
+  margin-top: 60px;
+  animation: fadeIn 0.8s ease-out 0.3s both;
+}
+
+.info-section h2 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #1f2937;
+  margin: 0 0 40px 0;
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+
+.guidelines-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.guideline-card {
+  background: white;
+  padding: 32px 24px;
+  border-radius: 16px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.guideline-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-brand) 0%, #22c55e 100%);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.guideline-card:hover::before {
+  transform: scaleX(1);
+}
+
+.guideline-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  border-color: rgba(74, 222, 128, 0.3);
+}
+
+.guideline-card.plastic:hover {
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.guideline-card.paper:hover {
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.guideline-card.glass:hover {
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.guideline-card.organic:hover {
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+.guideline-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  background: #f9fafb;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.guideline-card:hover .guideline-icon {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  transform: scale(1.1) rotate(5deg);
+}
+
+.guideline-card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 12px 0;
+}
+
+.guideline-card p {
+  font-size: 15px;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.7;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .pickup-main {
+    padding: 40px 16px;
+  }
+
+  .pickup-header h1 {
+    font-size: 2.25rem;
+  }
+
+  .pickup-header .subtitle {
+    font-size: 1.125rem;
+  }
+
+  .header-icon {
+    width: 80px;
+    height: 80px;
+  }
+
+  .pickup-form-card {
+    padding: 28px 24px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .guidelines-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .info-section h2 {
+    font-size: 1.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pickup-main {
+    padding: 32px 16px;
+  }
+
+  .pickup-header h1 {
+    font-size: 1.875rem;
+  }
+
+  .pickup-header .subtitle {
+    font-size: 1rem;
+  }
+
+  .header-icon {
+    width: 72px;
+    height: 72px;
+  }
+
+  .pickup-form-card {
+    padding: 24px 20px;
+  }
+
+  .pickup-form {
+    gap: 24px;
+  }
+
+  .form-group input,
+  .form-group select {
+    font-size: 16px; /* Prevent zoom on iOS */
+    padding: 14px 16px;
+  }
+
+  .info-section h2 {
+    font-size: 1.625rem;
+  }
+
+  .guideline-card {
+    padding: 28px 20px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .guidelines-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

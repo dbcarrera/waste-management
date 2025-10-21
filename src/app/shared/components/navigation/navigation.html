@@ -1,0 +1,26 @@
+<!-- Desktop Navigation Rail -->
+<nav class="nav-rail">
+  <div class="nav-rail-header">
+    <img src="logo.svg" alt="Logo" class="nav-logo" />
+    <h2 class="nav-title">Waste Portal</h2>
+  </div>
+
+  <div class="nav-items">
+    @for (item of visibleNavItems(); track item.route) {
+    <a [routerLink]="item.route" routerLinkActive="active" class="nav-item">
+      <lucide-icon [img]="item.icon" [size]="24"></lucide-icon>
+      <span>{{ item.label }}</span>
+    </a>
+    }
+  </div>
+</nav>
+
+<!-- Mobile Bottom Navigation -->
+<nav class="nav-bottom">
+  @for (item of visibleNavItems(); track item.route) {
+  <a [routerLink]="item.route" routerLinkActive="active" class="nav-item">
+    <lucide-icon [img]="item.icon" [size]="24"></lucide-icon>
+    <span>{{ item.label }}</span>
+  </a>
+  }
+</nav>

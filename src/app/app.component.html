@@ -1,0 +1,16 @@
+<nav style="display:flex; gap:12px; padding:12px; background:#f1f1f1;">
+  <a routerLink="/">Dashboard</a>
+  <a routerLink="/schedule">Schedule Pickup</a>
+  <a routerLink="/report">Report Issue</a>
+  <a routerLink="/history">Pickup History</a>
+  <a routerLink="/notifications">Notifications</a>
+  <a routerLink="/reports">Reports</a>
+  <a routerLink="/admin">Admin</a>
+  <span style="flex:1"></span>
+  <button *ngIf="!auth.getCurrentUser()" routerLink="/login">Login</button>
+  <button *ngIf="auth.getCurrentUser()" (click)="logout()">Logout</button>
+</nav>
+
+<div style="padding:16px;">
+  <router-outlet></router-outlet>
+</div>

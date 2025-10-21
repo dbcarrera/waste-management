@@ -1,0 +1,16 @@
+<div class="reports-container">
+  <h2>📊 Generated Reports</h2>
+
+  <div *ngIf="reports && reports.length > 0; else noReports">
+    <ul class="report-list">
+      <li *ngFor="let report of reports" class="report-item">
+        <h3>{{ report.title }}</h3>
+        <p>Created on: {{ report.createdAt | date: 'mediumDate' }}</p>
+      </li>
+    </ul>
+  </div>
+
+  <ng-template #noReports>
+    <p>No reports available yet.</p>
+  </ng-template>
+</div>
