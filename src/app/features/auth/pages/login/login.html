@@ -36,9 +36,9 @@
         />
       </div>
 
-      <app-button variant="primary" [type]="'submit'" [disabled]="isLoading">
+      <button class="btn-primary" type="submit" [disabled]="isLoading">
         {{ isLoading ? 'Logging in...' : 'Log In' }}
-      </app-button>
+      </button>
 
       <div class="auth-switch">
         <span>Don't have an account yet?</span>

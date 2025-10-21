@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { FrostedCard } from '../../../../shared/components/frosted-card/frosted-card';
-import { Button } from '../../../../shared/components/button/button';
 import { FormsModule } from '@angular/forms';
 import { Header } from '../../../../shared/components/header/header';
 import { Auth } from '../../../../shared/services/auth';
@@ -8,7 +7,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, FrostedCard, Button],
+  imports: [FormsModule, FrostedCard],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })

@@ -11,7 +11,7 @@
     <p class="message">{{ notification.message }}</p>
 
     @if (!notification.completed) {
-    <app-button variant="outline" (click)="markAsCompleted(notification)">Mark as Read</app-button>
+    <button class="btn-outline" (click)="markAsCompleted(notification)">Mark as Read</button>
     } @if (notification.completed) {
     <span class="completed-text">Completed on {{ notification.completed | date : 'medium' }}</span>
     }

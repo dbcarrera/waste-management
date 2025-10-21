@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Button } from '../../shared/components/button/button';
 import { PickupService } from './services/pickup';
 import { Auth } from '../../shared/services/auth';
 import { CommonModule } from '@angular/common';
@@ -17,7 +16,7 @@ import {
 
 @Component({
   selector: 'app-pickup',
-  imports: [CommonModule, FormsModule, Button, LucideAngularModule],
+  imports: [CommonModule, FormsModule, LucideAngularModule],
   templateUrl: './pickup.html',
   styleUrl: './pickup.css',
 })

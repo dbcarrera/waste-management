@@ -1,12 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { NotificationsService } from './services/notifications.service';
-import { Button } from '../../shared/components/button/button';
 
 @Component({
   selector: 'app-notifications',
   standalone: true,
-  imports: [DatePipe, Button],
+  imports: [DatePipe],
   templateUrl: './notifications.html',
   styleUrl: './notifications.css',
 })

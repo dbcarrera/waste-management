@@ -1,8 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Header } from '../../../../shared/components/header/header';
 import { FrostedCard } from '../../../../shared/components/frosted-card/frosted-card';
-import { Button } from '../../../../shared/components/button/button';
 import { Card } from '../../../../shared/components/card/card';
 import { Footer } from '../../../../shared/components/footer/footer';
 import { CalendarCheck, ChartColumn, Bell, History, LucideAngularModule } from 'lucide-angular';
@@ -11,7 +9,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
-  imports: [FormsModule, FrostedCard, Button, Card, Footer, LucideAngularModule],
+  imports: [FormsModule, FrostedCard, Card, Footer, LucideAngularModule],
   templateUrl: './signup.html',
   styleUrl: './signup.css',
 })

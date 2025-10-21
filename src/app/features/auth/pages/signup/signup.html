@@ -60,9 +60,9 @@
                 />
               </div>
 
-              <app-button variant="primary" [type]="'submit'" [disabled]="isLoading">
+              <button class="btn-primary" type="submit" [disabled]="isLoading">
                 {{ isLoading ? 'Signing up...' : 'Sign Up' }}
-              </app-button>
+              </button>
 
               <div class="auth-switch">
                 <span>Already have an account?</span>
@@ -113,7 +113,7 @@
       </div>
 
       <div class="cta-section">
-        <app-button (click)="scrollToTop()" variant="primary">Join Our Community Today!</app-button>
+        <button (click)="scrollToTop()" class="primary">Join Our Community Today!</button>
         <p class="cta-subtitle">Start managing your waste smarter</p>
       </div>
     </div>
