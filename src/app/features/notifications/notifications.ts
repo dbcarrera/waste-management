@@ -11,7 +11,7 @@ import { NotificationsService } from './services/notifications.service';
 })
 export class Notifications {
   private notificationsService = inject(NotificationsService);
-  protected notifications = this.notificationsService.getNotifications();
+  protected notifications = this.notificationsService.allNotifications();
 
   markAsCompleted(notification: any) {
     this.notificationsService.markAsCompleted(notification);

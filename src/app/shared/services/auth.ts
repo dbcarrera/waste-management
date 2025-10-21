@@ -1,12 +1,14 @@
 import { Injectable, signal, computed, inject } from '@angular/core';
 import { User } from '../../core/models/user';
 import { Router } from '@angular/router';
+import { DatabaseApi } from './database-api';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Auth {
   private router = inject(Router);
+  private databaseService = inject(DatabaseApi);
 
   // The current user state
   private currentUserSignal = signal<User | null>(null);
@@ -16,8 +18,7 @@ export class Auth {
   isAuthenticated = computed(() => this.currentUserSignal() !== null);
   isAdmin = computed(() => this.currentUserSignal()?.userType === 'admin');
 
-  private readonly AUTH_STORAGE_KEY = 'waste_management_user';
-  private readonly USERS_STORAGE_KEY = 'waste_management_users';
+  private readonly AUTH_STORAGE_KEY = 'AUTH_KEY';
 
   constructor() {
     // Load user from localStorage on initialization
@@ -25,30 +26,17 @@ export class Auth {
   }
 
   // TODO: REMOVE once backend is implemented, as this is fake data
-  private initializeUsers(): User[] {
-    const parsedUsers = JSON.parse(localStorage.getItem(this.USERS_STORAGE_KEY) || '[]') as User[];
-    if (parsedUsers.length > 0) {
-      // Already have users
-      return parsedUsers;
-    }
-
-    const users: User[] = [
-      { id: 'admin@gmail.com', userType: 'admin', communityId: 'community-1' },
-      { id: 'user1@gmail.com', userType: 'user', communityId: 'community-1' },
-      { id: 'user3@gmail.com', userType: 'user', communityId: 'community-2' },
-    ];
-    localStorage.setItem(this.USERS_STORAGE_KEY, JSON.stringify(users));
-
-    return users;
+  // TODO: When MongoDB is used, do not access all users on the client.
+  private fetchUsers(): User[] {
+    return this.databaseService.read<User>('ewms_users');
   }
 
+  // TODO: Not needed when users are stored on backend
   private addUser(user: User) {
-    const users = JSON.parse(localStorage.getItem(this.USERS_STORAGE_KEY) || '[]') as User[];
-    users.push(user);
-    localStorage.setItem(this.USERS_STORAGE_KEY, JSON.stringify(users));
+    this.databaseService.write<User>('ewms_users', [...this.fetchUsers(), user]);
   }
 
-  // TODO: Update/remove once backend is implemented
+  // TODO: User auth API keys may be stored on client, however it depends on MongoDB implementation
   /**
    * Load user data from localStorage
    */
@@ -65,7 +53,6 @@ export class Auth {
     }
   }
 
-  // TODO: Update/remove once backend is implemented
   /**
    * Save user data to localStorage
    */
@@ -88,7 +75,7 @@ export class Auth {
       // TODO: Replace with actual API
 
       if (email && password) {
-        const allUsers = this.initializeUsers();
+        const allUsers = this.fetchUsers();
 
         // TODO: For now, ID is email. In real app, email/password will only be on the backend for security reasons.
         const foundUser = allUsers.find((u) => u.id === email);
@@ -118,7 +105,7 @@ export class Auth {
     try {
       // TODO: Replace with actual API
       if (email && password) {
-        if (this.initializeUsers().find((u) => u.id === email)) {
+        if (this.fetchUsers().find((u) => u.id === email)) {
           return false; // User already exists
         }
 
@@ -147,13 +134,6 @@ export class Auth {
     this.currentUserSignal.set(null);
     localStorage.removeItem(this.AUTH_STORAGE_KEY);
     this.router.navigate(['/login']);
-  }
-
-  /**
-   * Get current user data
-   */
-  getCurrentUser(): User | null {
-    return this.currentUserSignal();
   }
 
   /**

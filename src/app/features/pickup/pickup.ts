@@ -45,7 +45,7 @@ export class Pickup {
       return;
     }
 
-    const currentUser = this.authService.getCurrentUser();
+    const currentUser = this.authService.currentUser();
     if (!currentUser) {
       this.errorMessage = 'You must be logged in to create a pickup';
       this.successMessage = '';

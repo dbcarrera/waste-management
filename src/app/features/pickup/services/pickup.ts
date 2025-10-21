@@ -1,90 +1,43 @@
-import { Injectable, signal } from '@angular/core';
+import { effect, inject, Injectable, signal } from '@angular/core';
 import { Pickup } from '../../../core/models/pickup';
+import { DatabaseApi } from '../../../shared/services/database-api';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PickupService {
-  private readonly PICKUPS_STORAGE_KEY = 'waste_management_pickups';
-
   // Signal to track all pickups
-  private pickupsSignal = signal<Pickup[]>([]);
+  private pickups = signal<Pickup[]>([]);
+  private databaseService = inject(DatabaseApi);
 
-  // Public readonly access to pickups
-  pickups = this.pickupsSignal.asReadonly();
+  // Public readonly signals
+  allPickups = this.pickups.asReadonly();
 
   constructor() {
-    // Load pickups from localStorage on initialization
-    this.loadPickupsFromStorage();
+    let initialRun = true;
+
+    this.pickups.set(this.fetchPickups());
+
+    effect(() => {
+      // Add as effect dependency.
+      this.pickups();
+
+      if (!initialRun) {
+        this.savePickups();
+      }
+
+      initialRun = false;
+    });
   }
 
-  // TODO: REMOVE once backend is implemented, as this is fake data
-  private initializePickups(): Pickup[] {
-    const parsedPickups = JSON.parse(
-      localStorage.getItem(this.PICKUPS_STORAGE_KEY) || '[]'
-    ) as Pickup[];
-    if (parsedPickups.length > 0) {
-      // Already have pickups
-      return parsedPickups;
-    }
-
-    const mockPickups: Pickup[] = [
-      {
-        userId: 'user1@gmail.com',
-        type: 'plastic',
-        location: '123 Main St, Apt 4B',
-        created: new Date('2024-10-01T10:30:00').toISOString(),
-        completed: new Date('2024-10-02T14:20:00').toISOString(),
-      },
-      {
-        userId: 'user1@gmail.com',
-        type: 'paper',
-        location: '123 Main St, Apt 4B',
-        created: new Date('2024-10-05T09:15:00').toISOString(),
-        completed: new Date('2024-10-06T11:45:00').toISOString(),
-      },
-      {
-        userId: 'admin@gmail.com',
-        type: 'glass',
-        location: '456 Oak Ave',
-        created: new Date('2024-10-08T14:00:00').toISOString(),
-        completed: null,
-      },
-      {
-        userId: 'user3@gmail.com',
-        type: 'organic',
-        location: '789 Pine Rd',
-        created: new Date('2024-10-10T08:30:00').toISOString(),
-        completed: null,
-      },
-    ];
-
-    localStorage.setItem(this.PICKUPS_STORAGE_KEY, JSON.stringify(mockPickups));
-    return mockPickups;
+  // TODO: Fetch from real API
+  private fetchPickups(): Pickup[] {
+    return this.databaseService.read<Pickup>('ewms_pickups');
   }
 
-  /**
-   * Load pickups from localStorage
-   */
-  private loadPickupsFromStorage(): void {
-    try {
-      const pickups = this.initializePickups();
-      this.pickupsSignal.set(pickups);
-    } catch (error) {
-      console.error('Error loading pickups from storage:', error);
-      this.pickupsSignal.set([]);
-    }
-  }
-
-  /**
-   * Save pickups to localStorage
-   */
-  private savePickupsToStorage(pickups: Pickup[]): void {
-    try {
-      localStorage.setItem(this.PICKUPS_STORAGE_KEY, JSON.stringify(pickups));
-    } catch (error) {
-      console.error('Error saving pickups to storage:', error);
-    }
+  private savePickups() {
+    this.databaseService.write<Pickup>('ewms_pickups', this.pickups());
   }
 
   /**
@@ -93,18 +46,20 @@ export class PickupService {
   createPickup(userId: string, type: Pickup['type'], location: string): boolean {
     try {
       const newPickup: Pickup = {
-        userId,
-        type,
-        location,
+        id: uuidv4(),
+        userId: userId,
+        type: type,
+        location: location,
         created: new Date().toISOString(),
         completed: null,
       };
 
-      const currentPickups = this.pickupsSignal();
+      const currentPickups = this.pickups();
       const updatedPickups = [...currentPickups, newPickup];
 
-      this.pickupsSignal.set(updatedPickups);
-      this.savePickupsToStorage(updatedPickups);
+      console.log('Creating pickup:', updatedPickups);
+
+      this.pickups.set(updatedPickups);
 
       return true;
     } catch (error) {
@@ -114,24 +69,17 @@ export class PickupService {
   }
 
   /**
-   * Get all pickups
-   */
-  getAllPickups(): Pickup[] {
-    return this.pickupsSignal();
-  }
-
-  /**
    * Get pickups for a specific user
    */
   getPickupsByUserId(userId: string): Pickup[] {
-    return this.pickupsSignal().filter((pickup) => pickup.userId === userId);
+    return this.pickups().filter((pickup) => pickup.userId === userId);
   }
 
   /**
    * Get pending (not completed) pickups
    */
   getPendingPickups(userId?: string): Pickup[] {
-    const allPickups = this.pickupsSignal();
+    const allPickups = this.pickups();
     const pendingPickups = allPickups.filter((pickup) => pickup.completed === null);
 
     if (userId) {
@@ -145,7 +93,7 @@ export class PickupService {
    * Get completed pickups
    */
   getCompletedPickups(userId?: string): Pickup[] {
-    const allPickups = this.pickupsSignal();
+    const allPickups = this.pickups();
     const completedPickups = allPickups.filter((pickup) => pickup.completed !== null);
 
     if (userId) {
@@ -160,7 +108,7 @@ export class PickupService {
    */
   completePickup(pickupToComplete: Pickup): boolean {
     try {
-      const currentPickups = this.pickupsSignal();
+      const currentPickups = this.pickups();
       const updatedPickups = currentPickups.map((pickup) => {
         if (
           pickup.userId === pickupToComplete.userId &&
@@ -172,8 +120,7 @@ export class PickupService {
         return pickup;
       });
 
-      this.pickupsSignal.set(updatedPickups);
-      this.savePickupsToStorage(updatedPickups);
+      this.pickups.set(updatedPickups);
 
       return true;
     } catch (error) {

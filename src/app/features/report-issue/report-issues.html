@@ -1,25 +1,81 @@
 <div class="report-container">
-  <h2>Report an Issue</h2>
+  <div class="header-section">
+    <h2>Report an Issue</h2>
+    <p class="subtitle">Help us improve by reporting any issues you encounter</p>
+  </div>
 
   <form (ngSubmit)="submitIssue()" #issueForm="ngForm">
-    <label for="desc">Issue Description:</label>
-    <textarea
-      id="desc"
-      name="desc"
-      [(ngModel)]="issueDescription"
-      placeholder="Describe the issue..."
-      required>
-    </textarea>
+    <div class="form-group">
+      <label for="issueType">Issue Type <span class="required">*</span></label>
+      <div class="select-wrapper">
+        <select
+          id="issueType"
+          name="issueType"
+          [(ngModel)]="issueType"
+          required
+          class="form-select"
+        >
+          <option value="" disabled selected>Select an issue type</option>
+          <option value="missed pickup">Missed Pickup</option>
+          <option value="bug">Bug/Technical Issue</option>
+          <option value="other">Other</option>
+        </select>
+        <div class="select-icon">
+          <svg
+            width="12"
+            height="8"
+            viewBox="0 0 12 8"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M1 1L6 6L11 1"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
 
-    <button type="submit">Submit</button>
+    <div class="form-group">
+      <label for="issueMessage">Issue Description <span class="required">*</span></label>
+      <textarea
+        id="issueMessage"
+        name="issueMessage"
+        [(ngModel)]="issueMessage"
+        placeholder="Please provide detailed information about the issue..."
+        required
+        minlength="4"
+        class="form-textarea"
+      ></textarea>
+      <div class="char-count">{{ issueMessage.length }} characters</div>
+    </div>
+
+    <button class="btn-primary" type="submit" [disabled]="!issueForm.valid || isSubmitting">
+      @if (isSubmitting) {
+      <span class="spinner"></span>
+      Submitting... } @else { Submit Issue }
+    </button>
   </form>
 
-  <p *ngIf="submitted" class="success-message">
-    ✅ Your issue has been reported!
-  </p>
-</div>
-<div class="navigate-container">
-  <button routerLink="/pickup-history" class="navigate-btn">
-    View Pickup History
-  </button>
+  @if (submitted) {
+  <div class="success-message">
+    <div class="success-icon">✓</div>
+    <div class="success-content">
+      <h3>Issue Reported Successfully!</h3>
+      <p>Thank you for your report. We'll look into this as soon as possible.</p>
+    </div>
+  </div>
+  } @if (errorMessage) {
+  <div class="error-message">
+    <div class="error-icon">⚠</div>
+    <div class="error-content">
+      <h3>Submission Failed</h3>
+      <p>{{ errorMessage }}</p>
+    </div>
+  </div>
+  }
 </div>

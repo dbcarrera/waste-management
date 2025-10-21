@@ -1,53 +1,41 @@
-import { effect, Injectable, signal } from '@angular/core';
+import { effect, inject, Injectable, signal } from '@angular/core';
 import { AppNotification } from '../../../core/models/app-notification';
+import { DatabaseApi } from '../../../shared/services/database-api';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NotificationsService {
   private notifications = signal<AppNotification[]>([]);
+  private databaseService = inject(DatabaseApi);
 
-  // TODO: Fetch notifications from API
-  private fetchNotifications(): AppNotification[] {
-    return [
-      {
-        date: new Date().toISOString(),
-        title: 'Pickup Scheduled',
-        message: 'Your waste pickup has been scheduled for tomorrow',
-        priority: 'high',
-        communityId: '1',
-        completed: null,
-      },
-      {
-        date: new Date(Date.now() - 86400000).toISOString(), // Yesterday
-        title: 'Community Update',
-        message: 'New recycling guidelines have been posted',
-        priority: 'medium',
-        communityId: '1',
-        completed: null,
-      },
-      {
-        date: new Date(Date.now() - 86400000 * 2).toISOString(), // 2 days ago
-        title: 'We are up and running!',
-        message: 'We have just launched our services.',
-        priority: 'low',
-        communityId: null,
-        completed: null,
-      },
-    ];
-  }
+  // Public readonly signals
+  allNotifications = this.notifications.asReadonly();
 
   constructor() {
+    let initialRun = true;
     this.notifications.set(this.fetchNotifications());
 
+    // Save notifications on changes
     effect(() => {
-      // TODO: Whenever notifications are updated, update database.
-      console.log(`UPDATE NOTIFICATIONS WITH THESE VALUES: ${this.notifications}`);
+      // Add as effect dependency.
+      this.notifications();
+
+      if (!initialRun) {
+        this.saveNotifications();
+      }
+
+      initialRun = false;
     });
   }
 
-  getNotifications() {
-    return this.notifications;
+  // TODO: Fetch notifications from real API
+  private fetchNotifications(): AppNotification[] {
+    return this.databaseService.read<AppNotification>('ewms_notifications');
+  }
+
+  private saveNotifications() {
+    this.databaseService.write<AppNotification>('ewms_notifications', this.notifications());
   }
 
   markAsCompleted(notificationToUpdate: AppNotification) {
