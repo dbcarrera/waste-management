@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PickupService } from './services/pickup';
@@ -27,18 +27,15 @@ export class Pickup {
   readonly Package = Package;
   readonly Wine = Wine;
   readonly LeafyGreen = LeafyGreen;
+  private pickupService = inject(PickupService);
+  private router = inject(Router);
+  private authService = inject(Auth);
 
   wasteType: 'paper' | 'glass' | 'organic' | 'plastic' = 'plastic';
   location: string = '';
   errorMessage: string = '';
   successMessage: string = '';
   isLoading: boolean = false;
-
-  constructor(
-    private pickupService: PickupService,
-    private authService: Auth,
-    private router: Router
-  ) {}
 
   async onCreatePickup() {
     // Validation

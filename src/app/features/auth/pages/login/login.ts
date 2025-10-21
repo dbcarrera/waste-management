@@ -13,12 +13,11 @@ import { Router } from '@angular/router';
 })
 export class Login {
   private authService = inject(Auth);
+  private router = inject(Router);
   email: string = '';
   password: string = '';
   errorMessage: string = '';
   isLoading: boolean = false;
-
-  constructor(private router: Router) {}
 
   async onLogin() {
     if (!this.email || !this.password) {

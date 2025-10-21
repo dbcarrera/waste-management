@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 })
 export class Signup {
   private authService = inject(Auth);
+  private router = inject(Router);
   readonly CalendarCheck = CalendarCheck;
   readonly ChartColumn = ChartColumn;
   readonly Bell = Bell;
@@ -25,8 +26,6 @@ export class Signup {
   confirmPassword: string = '';
   errorMessage: string = '';
   isLoading: boolean = false;
-
-  constructor(private router: Router) {}
 
   async onSignup() {
     // Validation

@@ -1,4 +1,4 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal, computed, inject } from '@angular/core';
 import { User } from '../../core/models/user';
 import { Router } from '@angular/router';
 
@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class Auth {
+  private router = inject(Router);
+
   // The current user state
   private currentUserSignal = signal<User | null>(null);
 
@@ -17,7 +19,7 @@ export class Auth {
   private readonly AUTH_STORAGE_KEY = 'waste_management_user';
   private readonly USERS_STORAGE_KEY = 'waste_management_users';
 
-  constructor(private router: Router) {
+  constructor() {
     // Load user from localStorage on initialization
     this.loadUserFromStorage();
   }

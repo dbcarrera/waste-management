@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { COMPANY_NAME } from '../../../constants/company.constants';
 import { Router } from '@angular/router';
 
@@ -9,9 +9,8 @@ import { Router } from '@angular/router';
   styleUrl: './header.css',
 })
 export class Header {
+  private router = inject(Router);
   readonly companyName = COMPANY_NAME;
-
-  constructor(private router: Router) {}
 
   redirectHome() {
     this.router.navigate(['/']);
