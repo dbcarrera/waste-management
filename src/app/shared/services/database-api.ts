@@ -47,7 +47,7 @@ export class DatabaseApi {
                 communityId: 'f8ec3ad8-61e9-4fb8-aca8-cbd80f2a27ad',
               },
               {
-                id: 'user3@gmail.com',
+                id: 'user2@gmail.com',
                 userType: 'user',
                 communityId: 'f8ec3ad8-61e9-4fb8-aca8-cbd80f2a27ad',
               },
@@ -86,7 +86,7 @@ export class DatabaseApi {
                 location:
                   '20, 28, Jalan Jemuju Empat 16/13d, Seksyen 16, 40200 Shah Alam, Selangor',
                 created: new Date(Date.now() - 86400000 * 2).toISOString(), // 2 days ago,
-                completed: true,
+                completed: new Date(Date.now() - 86400000).toISOString(),
               },
             ] as Pickup[];
             break;
