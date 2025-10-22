@@ -1,3 +1,54 @@
+@if (isAdmin()) {
+<div class="admin-section">
+  <div class="admin-header">
+    <h2>All Reported Issues</h2>
+    <p class="subtitle">View and manage all user-reported issues</p>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Issue Type</th>
+          <th>Description</th>
+          <th>Date Reported</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (issue of allIssues(); track issue.id) {
+        <tr>
+          <td class="type-cell">
+            <span class="issue-type-badge">{{ issue.issueType }}</span>
+          </td>
+          <td class="message-cell">{{ issue.issueMessage }}</td>
+          <td class="date-cell">{{ issue.date | date : 'medium' }}</td>
+          <td class="status-cell">
+            @if (issue.completed) {
+            <div class="status-content">
+              <span class="status-badge completed">
+                <span class="completed-icon">✓</span>
+                Completed
+              </span>
+              <span class="completed-date">{{ issue.completed | date : 'short' }}</span>
+            </div>
+            } @else {
+            <div class="status-content">
+              <span class="status-badge pending">Pending</span>
+              <span class="mark-completed-link" (click)="completeIssue(issue.id)">
+                Mark as completed
+              </span>
+            </div>
+            }
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+}
+
 <div class="report-container">
   <div class="header-section">
     <h2>Report an Issue</h2>
@@ -79,54 +130,3 @@
   </div>
   }
 </div>
-
-@if (isAdmin()) {
-<div class="admin-section">
-  <div class="admin-header">
-    <h2>All Reported Issues</h2>
-    <p class="subtitle">View and manage all user-reported issues</p>
-  </div>
-
-  <div class="table-wrapper">
-    <table>
-      <thead>
-        <tr>
-          <th>Issue Type</th>
-          <th>Description</th>
-          <th>Date Reported</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (issue of allIssues(); track issue.id) {
-        <tr>
-          <td class="type-cell">
-            <span class="issue-type-badge">{{ issue.issueType }}</span>
-          </td>
-          <td class="message-cell">{{ issue.issueMessage }}</td>
-          <td class="date-cell">{{ issue.date | date : 'medium' }}</td>
-          <td class="status-cell">
-            @if (issue.completed) {
-            <div class="status-content">
-              <span class="status-badge completed">
-                <span class="completed-icon">✓</span>
-                Completed
-              </span>
-              <span class="completed-date">{{ issue.completed | date : 'short' }}</span>
-            </div>
-            } @else {
-            <div class="status-content">
-              <span class="status-badge pending">Pending</span>
-              <span class="mark-completed-link" (click)="completeIssue(issue.id)">
-                Mark as completed
-              </span>
-            </div>
-            }
-          </td>
-        </tr>
-        }
-      </tbody>
-    </table>
-  </div>
-</div>
-}
