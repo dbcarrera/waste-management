@@ -44,7 +44,7 @@ export class DatabaseApi {
               {
                 id: 'user1@gmail.com',
                 userType: 'user',
-                communityId: 'f8ec3ad8-61e9-4fb8-aca8-cbd80f2a27ad',
+                communityId: '712b1a37-df5c-456c-865f-4654edd25684',
               },
               {
                 id: 'user2@gmail.com',
@@ -96,7 +96,7 @@ export class DatabaseApi {
                 id: 'fa29d707-014d-409d-8a17-b39420084c18',
                 userId: 'user1@gmail.com',
                 issueType: 'missed pickup',
-                issueMessage: 'Bin not emptied',
+                issueMessage: 'Bin at HELP University S2 not emptied',
                 date: new Date().toISOString(),
               },
             ] as Issue[];
