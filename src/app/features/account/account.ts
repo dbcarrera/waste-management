@@ -58,6 +58,48 @@ export class Account {
     }
   }
 
+  onReportFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+
+      // Validate file type
+      if (file.type !== 'application/json') {
+        this.toastService.error('Please upload a valid JSON file');
+        input.value = '';
+        return;
+      }
+
+      // Read the file
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const content = e.target?.result as string;
+          const report = JSON.parse(content) as StatisticsReport;
+
+          // Validate the report structure
+          if (!report.created || !report.pickupsByType || !report.issuesByType) {
+            this.toastService.error('Invalid report format');
+            return;
+          }
+
+          this.toastService.success('Report uploaded successfully!');
+
+          // TODO: Process or store the uploaded report as needed
+        } catch (error) {
+          this.toastService.error('Failed to parse JSON file');
+        }
+      };
+
+      reader.onerror = () => {
+        this.toastService.error('Failed to read file');
+      };
+
+      reader.readAsText(file);
+      input.value = '';
+    }
+  }
+
   saveProfile() {
     const user = this.currentUser();
     if (!user) {

@@ -240,6 +240,59 @@
   background: linear-gradient(135deg, #fef2f2 0%, #ffffff 100%);
 }
 
+/* Report Upload Section */
+.report-upload-section {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.report-upload-section label {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.report-upload-section .form-input {
+  cursor: pointer;
+}
+
+.report-upload-section .form-input::-webkit-file-upload-button {
+  padding: 8px 16px;
+  background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-secondary) 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-right: 12px;
+}
+
+.report-upload-section .form-input::-webkit-file-upload-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.report-upload-section .form-input::file-selector-button {
+  padding: 8px 16px;
+  background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-secondary) 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-right: 12px;
+}
+
+.report-upload-section .form-input::file-selector-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 /* Messages */
 .success-message {
   padding: 16px 20px;

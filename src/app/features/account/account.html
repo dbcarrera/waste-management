@@ -97,7 +97,18 @@
     <div class="section-card">
       <h2>Generate Report</h2>
       <p class="section-description">Download a comprehensive report of all pickups and issues</p>
-      <button class="btn-outline" (click)="generateReport()">📊 Download Report (JSON)</button>
+      <button class="btn-primary" (click)="generateReport()">Download Report (JSON)</button>
+
+      <div class="form-group report-upload-section">
+        <label for="report-upload">Upload Report</label>
+        <input
+          type="file"
+          id="report-upload"
+          accept=".json,application/json"
+          (change)="onReportFileSelected($event)"
+          class="form-input"
+        />
+      </div>
     </div>
 
     <!-- Sign Out -->
