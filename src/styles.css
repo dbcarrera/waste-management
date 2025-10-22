@@ -18,6 +18,12 @@ body {
   --color-secondary: oklch(59.942% 0.08737 172.043);
 }
 
+/* Removes extra margin below all lucide icons */
+lucide-icon {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
 button {
   padding: 12px 24px;
   border: none;
