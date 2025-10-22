@@ -4,9 +4,71 @@
   margin: 0 auto;
 }
 
-.notifications-container h1 {
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 24px;
   animation: fadeIn 0.5s ease-out;
+}
+
+.notifications-container h1 {
+  margin: 0;
+}
+
+/* Create Form Styles */
+.create-form {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  animation: slideUp 0.4s ease-out;
+}
+
+.create-form h2 {
+  margin: 0 0 20px 0;
+  font-size: 1.4rem;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #333;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.form-textarea {
+  resize: vertical;
+  font-family: inherit;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
 }
 
 .notification-card {
