@@ -11,10 +11,10 @@
 /* Hero section with background image */
 .hero-container {
   position: relative;
-  min-height: 600px;
-  height: 70vh;
-  max-height: 800px;
-  overflow: hidden;
+  min-height: 700px;
+  height: auto;
+  overflow: visible;
+  padding-bottom: 60px;
 }
 
 .hero-img {
@@ -46,7 +46,7 @@
   gap: 48px;
   align-items: center;
   flex: 1;
-  padding: 40px 0;
+  padding: 60px 0;
   min-height: 0; /* Allow flex child to shrink */
 }
 
@@ -131,6 +131,47 @@
   background: rgba(255, 255, 255, 0.15);
 }
 
+.form-group select {
+  padding: 12px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 16px;
+  backdrop-filter: blur(5px);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+
+.form-group select:focus {
+  outline: none;
+  border-color: #4ade80;
+  box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.1);
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.form-group select option {
+  background: #1f2937;
+  color: white;
+  padding: 10px;
+}
+
+.form-group select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.community-select {
+  width: 100%;
+}
+
 .auth-switch {
   display: flex;
   justify-content: center;
@@ -193,9 +234,10 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .hero-container {
-    min-height: 100vh;
-    height: 100vh;
+    min-height: auto;
+    height: auto;
     max-height: none;
+    padding-bottom: 40px;
   }
 
   .hero-main {
@@ -203,6 +245,7 @@
     gap: 32px;
     text-align: center;
     justify-content: center;
+    padding: 40px 0;
   }
 
   .hero-title {
@@ -248,9 +291,10 @@
 
 @media (min-width: 769px) and (max-width: 1024px) {
   .hero-container {
-    min-height: 500px;
-    height: 60vh;
-    max-height: 700px;
+    min-height: 600px;
+    height: auto;
+    max-height: none;
+    padding-bottom: 50px;
   }
 
   .hero-title {
@@ -259,5 +303,6 @@
 
   .hero-main {
     gap: 32px;
+    padding: 50px 0;
   }
 }

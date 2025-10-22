@@ -6,6 +6,7 @@ import { Footer } from '../../../../shared/components/footer/footer';
 import { CalendarCheck, ChartColumn, Bell, History, LucideAngularModule } from 'lucide-angular';
 import { Auth } from '../../../../shared/services/auth';
 import { Router } from '@angular/router';
+import { CommunityApi } from '../../../../shared/services/community-api';
 
 @Component({
   selector: 'app-signup',
@@ -16,6 +17,7 @@ import { Router } from '@angular/router';
 export class Signup {
   private authService = inject(Auth);
   private router = inject(Router);
+  private communityService = inject(CommunityApi);
   readonly CalendarCheck = CalendarCheck;
   readonly ChartColumn = ChartColumn;
   readonly Bell = Bell;
@@ -24,13 +26,22 @@ export class Signup {
   email: string = '';
   password: string = '';
   confirmPassword: string = '';
+  selectedCommunityId: string = '';
   errorMessage: string = '';
   isLoading: boolean = false;
+
+  // Communities for dropdown
+  communities = this.communityService.allCommunities;
 
   async onSignup() {
     // Validation
     if (!this.email || !this.password || !this.confirmPassword) {
       this.errorMessage = 'Please fill in all fields';
+      return;
+    }
+
+    if (!this.selectedCommunityId) {
+      this.errorMessage = 'Please select a community';
       return;
     }
 
@@ -48,7 +59,11 @@ export class Signup {
     this.errorMessage = '';
 
     try {
-      const success = await this.authService.signup(this.email, this.password);
+      const success = await this.authService.signup(
+        this.email,
+        this.password,
+        this.selectedCommunityId
+      );
 
       if (success) {
         // Navigate to main app after successful signup

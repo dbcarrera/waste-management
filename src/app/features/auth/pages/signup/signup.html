@@ -35,6 +35,23 @@
               </div>
 
               <div class="form-group">
+                <label for="community-select">Community</label>
+                <select
+                  id="community-select"
+                  name="community"
+                  [(ngModel)]="selectedCommunityId"
+                  class="community-select"
+                  required
+                  [disabled]="isLoading"
+                >
+                  <option value="" disabled>Select a community</option>
+                  @for (community of communities(); track community.id) {
+                  <option [value]="community.id">{{ community.name }}</option>
+                  }
+                </select>
+              </div>
+
+              <div class="form-group">
                 <label for="password">Password</label>
                 <input
                   type="password"
@@ -113,7 +130,7 @@
       </div>
 
       <div class="cta-section">
-        <button (click)="scrollToTop()" class="primary">Join Our Community Today!</button>
+        <button (click)="scrollToTop()" class="btn-primary">Join Our Community Today!</button>
         <p class="cta-subtitle">Start managing your waste smarter</p>
       </div>
     </div>
