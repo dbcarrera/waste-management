@@ -1,7 +1,8 @@
-import { effect, inject, Injectable, signal } from '@angular/core';
-import { Pickup } from '../../../core/models/pickup';
-import { DatabaseApi } from '../../../shared/services/database-api';
+import { computed, effect, inject, Injectable, signal } from '@angular/core';
+import { Pickup } from '../../core/models/pickup';
+import { DatabaseApi } from './database-api';
 import { v4 as uuidv4 } from 'uuid';
+import { Auth } from './auth';
 
 @Injectable({
   providedIn: 'root',
@@ -10,9 +11,13 @@ export class PickupService {
   // Signal to track all pickups
   private pickups = signal<Pickup[]>([]);
   private databaseService = inject(DatabaseApi);
+  private authService = inject(Auth);
 
   // Public readonly signals
   allPickups = this.pickups.asReadonly();
+  userPickups = computed(() =>
+    this.pickups().filter((pickup) => pickup.userId === (this.authService.currentUser()?.id ?? ''))
+  );
 
   constructor() {
     let initialRun = true;
@@ -69,52 +74,13 @@ export class PickupService {
   }
 
   /**
-   * Get pickups for a specific user
-   */
-  getPickupsByUserId(userId: string): Pickup[] {
-    return this.pickups().filter((pickup) => pickup.userId === userId);
-  }
-
-  /**
-   * Get pending (not completed) pickups
-   */
-  getPendingPickups(userId?: string): Pickup[] {
-    const allPickups = this.pickups();
-    const pendingPickups = allPickups.filter((pickup) => pickup.completed === null);
-
-    if (userId) {
-      return pendingPickups.filter((pickup) => pickup.userId === userId);
-    }
-
-    return pendingPickups;
-  }
-
-  /**
-   * Get completed pickups
-   */
-  getCompletedPickups(userId?: string): Pickup[] {
-    const allPickups = this.pickups();
-    const completedPickups = allPickups.filter((pickup) => pickup.completed !== null);
-
-    if (userId) {
-      return completedPickups.filter((pickup) => pickup.userId === userId);
-    }
-
-    return completedPickups;
-  }
-
-  /**
    * Mark a pickup as completed
    */
-  completePickup(pickupToComplete: Pickup): boolean {
+  completePickup(pickupId: string): boolean {
     try {
       const currentPickups = this.pickups();
       const updatedPickups = currentPickups.map((pickup) => {
-        if (
-          pickup.userId === pickupToComplete.userId &&
-          pickup.created === pickupToComplete.created &&
-          pickup.type === pickupToComplete.type
-        ) {
+        if (pickup.id === pickupId) {
           return { ...pickup, completed: new Date().toISOString() };
         }
         return pickup;

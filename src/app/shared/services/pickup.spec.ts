@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { Pickup } from '../pickup';
+import { Pickup } from '../../features/pickup/pickup';
 
 describe('Pickup', () => {
   let service: Pickup;

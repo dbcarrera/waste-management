@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PickupService } from './services/pickup';
+import { PickupService } from '../../shared/services/pickup';
 import { Auth } from '../../shared/services/auth';
 import { CommonModule } from '@angular/common';
 import {
