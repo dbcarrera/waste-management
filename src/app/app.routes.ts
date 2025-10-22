@@ -5,9 +5,9 @@ import { Notifications } from './features/notifications/notifications';
 import { ReportIssues } from './features/report-issue/report-issues';
 import { Pickup } from './features/pickup/pickup';
 import { Pickups } from './features/pickup-history/pickup-history';
-import { Dashboard } from './features/admin/pages/dashboard/dashboard';
 import { authGuard } from './shared/guards/auth-guard';
 import { noAuthGuard } from './shared/guards/no-auth-guard';
+import { Account } from './features/account/account';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'pickup', pathMatch: 'full' },
@@ -34,8 +34,8 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
-    path: 'admin',
-    component: Dashboard,
+    path: 'account',
+    component: Account,
     canActivate: [authGuard],
   },
 ];
