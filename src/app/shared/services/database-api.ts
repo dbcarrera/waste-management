@@ -38,16 +38,25 @@ export class DatabaseApi {
               // Passwords are to be salted and hashed and stored on the backend ONLY.
               {
                 id: 'admin@gmail.com',
+                name: 'Admin Person',
+                pictureUrl:
+                  'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png',
                 userType: 'admin',
                 communityId: '712b1a37-df5c-456c-865f-4654edd25684',
               },
               {
                 id: 'user1@gmail.com',
+                name: 'Mario King',
+                pictureUrl:
+                  'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png',
                 userType: 'user',
                 communityId: '712b1a37-df5c-456c-865f-4654edd25684',
               },
               {
                 id: 'user2@gmail.com',
+                name: 'Nicolas Luigi',
+                pictureUrl:
+                  'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png',
                 userType: 'user',
                 communityId: 'f8ec3ad8-61e9-4fb8-aca8-cbd80f2a27ad',
               },

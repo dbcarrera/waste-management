@@ -10,6 +10,7 @@ import {
   LayoutDashboard,
   LogOut,
   CircleAlert,
+  CircleUser,
   LucideIconData,
 } from 'lucide-angular';
 
@@ -36,13 +37,14 @@ export class Navigation {
   Bell = Bell;
   LayoutDashboard = LayoutDashboard;
   LogOut = LogOut;
+  CircleUser = CircleUser;
 
   navItems: NavItem[] = [
     { label: 'Pickup', route: '/pickup', icon: Calendar },
     { label: 'History', route: '/pickup-history', icon: History },
     { label: 'Issues', route: '/report-issues', icon: CircleAlert },
     { label: 'Notifications', route: '/notifications', icon: Bell },
-    { label: 'Admin', route: '/admin', icon: LayoutDashboard, adminOnly: true },
+    { label: 'Account', route: '/account', icon: CircleUser },
   ];
 
   visibleNavItems = computed(() => {
