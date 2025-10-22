@@ -245,6 +245,7 @@ form > .btn-primary {
 /* Admin Section */
 .admin-section {
   max-width: 1100px;
+  padding: 60px auto;
   padding: 40px 50px;
   animation: fadeIn 0.5s ease;
 }
@@ -438,6 +439,7 @@ td {
   }
 
   .admin-section {
+    margin: 30px 20px;
     padding: 30px 25px;
   }
 

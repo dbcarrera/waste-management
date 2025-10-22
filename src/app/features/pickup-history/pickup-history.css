@@ -1,5 +1,6 @@
 .history-container {
   max-width: 900px;
+  margin: 60px auto;
   padding: 40px 50px;
   border-radius: 20px;
   animation: fadeIn 0.5s ease;
@@ -164,6 +165,7 @@ td {
 /* Responsive Design */
 @media (max-width: 768px) {
   .history-container {
+    margin: 30px 20px;
     padding: 30px 25px;
   }
 
