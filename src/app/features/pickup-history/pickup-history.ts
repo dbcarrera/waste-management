@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-pickups',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './pickup-history.html',
-  styleUrls: ['./pickup-history.css']
+  styleUrls: ['./pickup-history.css'],
 })
 export class Pickups {
   pickupHistory = [

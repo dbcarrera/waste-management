@@ -10,11 +10,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let record of pickupHistory">
+      @for (record of pickupHistory; track record.date) {
+      <tr>
         <td>{{ record.date }}</td>
         <td>{{ record.location }}</td>
         <td>{{ record.status }}</td>
       </tr>
+      }
     </tbody>
   </table>
 </div>
