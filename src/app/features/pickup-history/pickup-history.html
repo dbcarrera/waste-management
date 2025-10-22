@@ -1,22 +1,44 @@
 <div class="history-container">
-  <h2>Pickup History</h2>
+  <div class="header-section">
+    <h2>Pickup History</h2>
+    <p class="subtitle">Track and manage your waste collection requests</p>
+  </div>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Location</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (record of pickupHistory; track record.date) {
-      <tr>
-        <td>{{ record.date }}</td>
-        <td>{{ record.location }}</td>
-        <td>{{ record.status }}</td>
-      </tr>
-      }
-    </tbody>
-  </table>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Location</th>
+          <th>Date Created</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (record of pickupHistory(); track record.id) {
+        <tr>
+          <td class="location-cell">{{ record.location }}</td>
+          <td class="date-cell">{{ record.created | date : 'medium' }}</td>
+          <td class="status-cell">
+            @if (record.completed) {
+            <div class="status-content">
+              <span class="status-badge completed">
+                <span class="completed-icon">✓</span>
+                Completed
+              </span>
+              <span class="completed-date">{{ record.completed | date : 'short' }}</span>
+            </div>
+            } @else {
+            <div class="status-content">
+              <span class="status-badge pending">Pending</span>
+              <span class="mark-completed-link" (click)="completePickup(record.id)">
+                Mark as completed
+              </span>
+            </div>
+            }
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
 </div>
