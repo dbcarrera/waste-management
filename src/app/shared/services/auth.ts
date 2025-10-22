@@ -111,6 +111,8 @@ export class Auth {
 
         const user: User = {
           id: email,
+          name: 'New User',
+          pictureUrl: 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png',
           userType: 'user',
           communityId: communityId || 'no-community',
         };
