@@ -2,7 +2,10 @@
   <h1>Notifications</h1>
 
   @for (notification of notifications; track notification.date) {
-  <div [class]="'notification-card ' + `priority-${notification.priority}`">
+  <div
+    [class]="'notification-card ' + `priority-${notification.priority}`"
+    [style.--index]="$index"
+  >
     <div class="notification-header">
       <h3>{{ notification.title }}</h3>
       <span class="date">{{ notification.date | date : 'medium' }}</span>

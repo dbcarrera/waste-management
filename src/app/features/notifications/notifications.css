@@ -6,6 +6,7 @@
 
 .notifications-container h1 {
   margin-bottom: 24px;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .notification-card {
@@ -17,11 +18,14 @@
   border: 2px solid rgba(0, 0, 0, 0.1);
 
   margin-bottom: 16px;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: slideUp 0.4s ease-out backwards;
+  animation-delay: calc(var(--index, 0) * 0.1s);
 }
 
 .notification-card:hover {
   transform: translateY(-2px);
+  box-shadow: 0 8px 12px -2px rgba(0, 0, 0, 0.15), 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .notification-header {
@@ -58,6 +62,7 @@
   text-align: center;
   color: #666;
   padding: 24px;
+  animation: fadeIn 0.6s ease-out;
 }
 
 /* Priority styles */
