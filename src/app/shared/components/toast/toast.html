@@ -1,0 +1,16 @@
+<div class="toast-container">
+  @for (toast of toasts(); track toast.id) {
+  <div class="toast" [ngClass]="'toast-' + toast.type" (click)="remove(toast.id)">
+    <div class="toast-icon">
+      @if (toast.type === 'success') {
+      <lucide-icon [img]="CircleCheck" [size]="20"></lucide-icon>
+      } @else if (toast.type === 'error') {
+      <lucide-icon [img]="CircleX" [size]="20"></lucide-icon>
+      } @else {
+      <lucide-icon [img]="Info" [size]="20"></lucide-icon>
+      }
+    </div>
+    <div class="toast-message">{{ toast.message }}</div>
+  </div>
+  }
+</div>

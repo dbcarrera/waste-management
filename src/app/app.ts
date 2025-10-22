@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { Auth } from './shared/services/auth';
 import { Header } from './shared/components/header/header';
 import { Navigation } from './shared/components/navigation/navigation';
+import { Toast } from './shared/components/toast/toast';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CommonModule, Header, Navigation],
+  imports: [RouterOutlet, CommonModule, Header, Navigation, Toast],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
