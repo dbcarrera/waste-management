@@ -9,10 +9,11 @@ import { Pickup } from '../../core/models/pickup';
 import { Issue } from '../../core/models/issue';
 import { LucideAngularModule, Upload } from 'lucide-angular';
 import { CommunityApi } from '../../shared/services/community-api';
+import { Charts } from './components/charts/charts';
 
 @Component({
   selector: 'app-account',
-  imports: [FormsModule, CommonModule, LucideAngularModule],
+  imports: [FormsModule, CommonModule, LucideAngularModule, Charts],
   templateUrl: './account.html',
   styleUrl: './account.css',
 })
@@ -37,6 +38,10 @@ export class Account {
   // Admin community creation
   newCommunityName = signal('');
   newCommunityLocation = signal('');
+
+  // Chart overlay state
+  showChartOverlay = signal(false);
+  currentReport = signal<StatisticsReport | null>(null);
 
   constructor() {
     const user = this.currentUser();
@@ -85,7 +90,9 @@ export class Account {
 
           this.toastService.success('Report uploaded successfully!');
 
-          // TODO: Process or store the uploaded report as needed
+          // Display the report in the chart overlay
+          this.currentReport.set(report);
+          this.showChartOverlay.set(true);
         } catch (error) {
           this.toastService.error('Failed to parse JSON file');
         }
@@ -179,7 +186,11 @@ export class Account {
       },
     };
 
-    // Download as JSON
+    // Show the chart overlay
+    this.currentReport.set(report);
+    this.showChartOverlay.set(true);
+
+    // Also download as JSON
     const dataStr = JSON.stringify(report, null, 2);
     const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
     const exportFileDefaultName = `waste-management-report-${
@@ -192,6 +203,10 @@ export class Account {
     linkElement.click();
 
     this.toastService.success('Report generated and downloaded!');
+  }
+
+  closeChartOverlay() {
+    this.showChartOverlay.set(false);
   }
 
   signOut() {

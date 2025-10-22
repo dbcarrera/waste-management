@@ -1,0 +1,106 @@
+<div class="overlay" (click)="onBackdropClick($event)">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="header-content">
+        <h2>Statistics Report</h2>
+        <p class="report-date">Generated: {{ getReportDate() }}</p>
+      </div>
+      <button class="close-button" (click)="onClose()">
+        <lucide-icon [img]="X" [size]="24"></lucide-icon>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <!-- Summary Cards -->
+      <div class="summary-cards">
+        <div class="summary-card">
+          <div class="summary-icon pickups-icon">📦</div>
+          <div class="summary-content">
+            <p class="summary-label">Total Pickups</p>
+            <p class="summary-value">{{ getTotalPickups() }}</p>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-icon issues-icon">⚠️</div>
+          <div class="summary-content">
+            <p class="summary-label">Total Issues</p>
+            <p class="summary-value">{{ getTotalIssues() }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts -->
+      <div class="charts-container">
+        <div class="chart-wrapper">
+          <canvas #pickupsChart></canvas>
+        </div>
+        <div class="chart-wrapper">
+          <canvas #issuesChart></canvas>
+        </div>
+      </div>
+
+      <!-- Data Table -->
+      <div class="data-section">
+        <h3>Detailed Breakdown</h3>
+
+        <div class="data-tables">
+          <div class="data-table">
+            <h4>Pickups by Type</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Count</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="type-indicator paper"></span> Paper</td>
+                  <td>{{ getPickupCount('paper') }}</td>
+                </tr>
+                <tr>
+                  <td><span class="type-indicator glass"></span> Glass</td>
+                  <td>{{ getPickupCount('glass') }}</td>
+                </tr>
+                <tr>
+                  <td><span class="type-indicator organic"></span> Organic</td>
+                  <td>{{ getPickupCount('organic') }}</td>
+                </tr>
+                <tr>
+                  <td><span class="type-indicator plastic"></span> Plastic</td>
+                  <td>{{ getPickupCount('plastic') }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="data-table">
+            <h4>Issues by Type</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Count</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="type-indicator missed"></span> Missed Pickup</td>
+                  <td>{{ getIssueCount('missed pickup') }}</td>
+                </tr>
+                <tr>
+                  <td><span class="type-indicator bug"></span> Bug</td>
+                  <td>{{ getIssueCount('bug') }}</td>
+                </tr>
+                <tr>
+                  <td><span class="type-indicator other"></span> Other</td>
+                  <td>{{ getIssueCount('other') }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

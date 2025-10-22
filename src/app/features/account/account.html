@@ -119,3 +119,8 @@
     </div>
   </div>
 </div>
+
+<!-- Chart Overlay -->
+@if (showChartOverlay()) {
+<app-charts [report]="currentReport()" (close)="closeChartOverlay()"></app-charts>
+}
