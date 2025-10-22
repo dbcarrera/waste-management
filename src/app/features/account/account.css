@@ -1,0 +1,347 @@
+.account-container {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 0 24px;
+  animation: fadeIn 0.5s ease;
+}
+
+.account-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.account-header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1f2937;
+  margin: 0 0 12px 0;
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Section Cards */
+.section-card {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 24px;
+  border: 2px solid rgba(0, 0, 0, 0.05);
+  animation: slideUp 0.4s ease-out;
+}
+
+.section-card h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 20px 0;
+}
+
+/* Profile Picture Section */
+.profile-picture-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.profile-picture-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.profile-picture {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--color-brand);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s ease;
+}
+
+.upload-overlay {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-secondary) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid white;
+}
+
+.upload-overlay:hover {
+  transform: scale(1.1);
+}
+
+.upload-overlay svg {
+  color: white;
+  width: 20px;
+  height: 20px;
+}
+
+.profile-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.picture-upload {
+  flex: 1;
+}
+
+.upload-label {
+  display: inline-block;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-secondary) 100%);
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 600;
+}
+
+.upload-label:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.file-input {
+  display: none;
+}
+
+.upload-hint {
+  margin: 8px 0 0 0;
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* Form Elements */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.1);
+}
+
+.disabled-input {
+  background-color: #f3f4f6;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.field-hint {
+  margin: 6px 0 0 0;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.section-hint {
+  margin: 12px 0 0 0;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.section-description {
+  margin: 0 0 16px 0;
+  color: #6b7280;
+}
+
+/* Community Selector Styles */
+.community-selector-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.selector-label {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.community-select {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+
+.community-select:hover {
+  border-color: #bdbdbd;
+}
+
+.community-select:focus {
+  outline: none;
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.1);
+}
+
+.community-select option {
+  padding: 10px;
+}
+
+/* Admin Section */
+.admin-section {
+  border: 2px solid var(--color-brand);
+  position: relative;
+}
+
+/* Sign Out Section */
+.sign-out-section {
+  border: 2px solid #fecaca;
+  background: linear-gradient(135deg, #fef2f2 0%, #ffffff 100%);
+}
+
+/* Messages */
+.success-message {
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border: 2px solid #bbf7d0;
+  border-radius: 12px;
+  color: #16a34a;
+  font-size: 15px;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 24px;
+  animation: slideUp 0.3s ease;
+}
+
+.error-message {
+  padding: 16px 20px;
+  background-color: #fef2f2;
+  border: 2px solid #fecaca;
+  border-radius: 12px;
+  color: #dc2626;
+  font-size: 15px;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 24px;
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Button Styles */
+.btn-danger {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 120px;
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  color: white;
+}
+
+.btn-danger:hover {
+  background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .account-container {
+    margin: 40px auto;
+    padding: 0 16px;
+  }
+
+  .account-header h1 {
+    font-size: 2rem;
+  }
+
+  .section-card {
+    padding: 24px 20px;
+  }
+
+  .profile-picture-section {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 24px;
+  }
+
+  .profile-picture {
+    width: 120px;
+    height: 120px;
+  }
+
+  .profile-form {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .account-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .section-card {
+    padding: 20px 16px;
+  }
+
+  .profile-picture {
+    width: 100px;
+    height: 100px;
+  }
+
+  .upload-overlay {
+    width: 38px;
+    height: 38px;
+    bottom: 4px;
+    right: 4px;
+  }
+
+  .upload-overlay svg {
+    width: 18px;
+    height: 18px;
+  }
+}

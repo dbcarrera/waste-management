@@ -1,1 +1,110 @@
-<p>account works!</p>
+<div class="account-container">
+  <div class="account-header">
+    <h1>Account Settings</h1>
+    <p class="subtitle">Manage your profile and preferences</p>
+  </div>
+
+  <!-- Profile Section -->
+  <div class="section-card">
+    <h2>Profile Information</h2>
+
+    <div class="profile-picture-section">
+      <div class="profile-picture-wrapper">
+        <img [src]="profilePictureUrl()" alt="Profile Picture" class="profile-picture" />
+        <label for="profile-picture-upload" class="upload-overlay">
+          <lucide-icon [img]="Upload" color="white"></lucide-icon>
+          <input
+            type="file"
+            id="profile-picture-upload"
+            accept="image/*"
+            (change)="onFileSelected($event)"
+            class="file-input"
+          />
+        </label>
+      </div>
+
+      <div class="profile-form">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            [(ngModel)]="username"
+            placeholder="Enter your username"
+            class="form-input"
+          />
+        </div>
+
+        <!-- Community Section -->
+        <div class="section-card">
+          <h2>Community</h2>
+
+          <div class="community-selector-wrapper">
+            <label for="community-select" class="selector-label">Community</label>
+            <select
+              id="community-select"
+              [(ngModel)]="selectedCommunityId"
+              class="community-select"
+            >
+              <option value="" disabled>Select a community</option>
+              @for (community of communities(); track community.id) {
+              <option [value]="community.id">{{ community.name }}</option>
+              }
+            </select>
+          </div>
+
+          <p class="section-hint">
+            Select the community you belong to for localized notifications and services
+          </p>
+        </div>
+
+        <button class="btn-primary" (click)="saveProfile()">Save Profile</button>
+      </div>
+    </div>
+
+    <!-- Admin: Create Community Section -->
+    @if (isAdmin()) {
+    <div class="section-card admin-section">
+      <h2>Create New Community</h2>
+
+      <div class="form-group">
+        <label for="community-name">Community Name</label>
+        <input
+          type="text"
+          id="community-name"
+          [(ngModel)]="newCommunityName"
+          placeholder="Enter community name"
+          class="form-input"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="community-location">Community Location</label>
+        <input
+          type="text"
+          id="community-location"
+          [(ngModel)]="newCommunityLocation"
+          placeholder="Enter community location"
+          class="form-input"
+        />
+      </div>
+
+      <button class="btn-primary" (click)="createCommunity()">Create Community</button>
+    </div>
+    }
+
+    <!-- Report Generation -->
+    <div class="section-card">
+      <h2>Generate Report</h2>
+      <p class="section-description">Download a comprehensive report of all pickups and issues</p>
+      <button class="btn-outline" (click)="generateReport()">📊 Download Report (JSON)</button>
+    </div>
+
+    <!-- Sign Out -->
+    <div class="section-card sign-out-section">
+      <h2>Sign Out</h2>
+      <p class="section-description">Sign out of your account</p>
+      <button class="btn-danger" (click)="signOut()">Sign Out</button>
+    </div>
+  </div>
+</div>
