@@ -82,6 +82,7 @@ export class ReportIssue {
         issueType,
         issueMessage: issueMessage.trim(),
         date: new Date().toISOString(),
+        completed: null,
       };
 
       const updatedIssues = [...this.issuesSignal(), newIssue];

@@ -4,4 +4,5 @@ export interface Issue {
   issueType: 'missed pickup' | 'bug' | 'other';
   issueMessage: string;
   date: string;
+  completed: string | null;
 }

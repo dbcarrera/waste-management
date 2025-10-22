@@ -1,18 +1,21 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { DatePipe } from '@angular/common';
 import { ReportIssue } from './services/report-issue';
 import { Issue } from '../../core/models/issue';
+import { Auth } from '../../shared/services/auth';
 
 @Component({
   selector: 'app-report-issues',
   standalone: true,
-  imports: [FormsModule, RouterModule],
+  imports: [FormsModule, RouterModule, DatePipe],
   templateUrl: './report-issues.html',
   styleUrls: ['./report-issues.css'],
 })
 export class ReportIssues {
   private reportIssueService = inject(ReportIssue);
+  private authService = inject(Auth);
 
   // Form fields
   issueType: Issue['issueType'] | '' = '';
@@ -22,6 +25,21 @@ export class ReportIssues {
   submitted: boolean = false;
   isSubmitting: boolean = false;
   errorMessage: string = '';
+
+  // Admin access
+  isAdmin = this.authService.isAdmin;
+  allIssues = this.reportIssueService.allIssues;
+
+  completeIssue(issueId: string): void {
+    const success = this.reportIssueService.updateIssue(issueId, {
+      completed: new Date().toISOString(),
+    });
+    if (success) {
+      console.log('Issue marked as completed successfully');
+    } else {
+      console.error('Failed to mark issue as completed');
+    }
+  }
 
   async submitIssue() {
     if (this.issueType === '' || this.issueMessage.trim() === '') {
