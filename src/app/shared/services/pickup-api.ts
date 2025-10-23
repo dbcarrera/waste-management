@@ -69,7 +69,12 @@ export class PickupApi {
   /**
    * Create a new pickup
    */
-  createPickup(userId: string, type: Pickup['type'], location: string): boolean {
+  createPickup(
+    userId: string,
+    type: Pickup['type'],
+    location: string,
+    targetDate: string
+  ): boolean {
     try {
       const newPickup: Pickup = {
         id: uuidv4(),
@@ -78,6 +83,7 @@ export class PickupApi {
         location: location,
         created: new Date().toISOString(),
         completed: null,
+        targetDate: targetDate,
       };
 
       const currentPickups = this.pickups();

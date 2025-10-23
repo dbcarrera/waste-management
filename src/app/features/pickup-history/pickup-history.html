@@ -38,6 +38,7 @@
         <tr>
           <th>Location</th>
           <th>Date Created</th>
+          <th>Target Date</th>
           <th>Status</th>
         </tr>
       </thead>
@@ -46,6 +47,7 @@
         <tr>
           <td class="location-cell">{{ record.location }}</td>
           <td class="date-cell">{{ record.created | date : 'medium' }}</td>
+          <td class="date-cell">{{ record.targetDate | date : 'mediumDate' }}</td>
           <td class="status-cell">
             @if (record.completed) {
             <div class="status-content">

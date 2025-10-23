@@ -5,4 +5,5 @@ export interface Pickup {
   location: string;
   created: string;
   completed: string | null;
+  targetDate: string;
 }

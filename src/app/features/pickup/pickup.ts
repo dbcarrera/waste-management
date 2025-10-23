@@ -11,6 +11,7 @@ import {
   Package,
   Wine,
   LeafyGreen,
+  Calendar,
   LucideAngularModule,
 } from 'lucide-angular';
 import { ToastService } from '../../shared/services/toast';
@@ -28,6 +29,7 @@ export class Pickup {
   readonly Package = Package;
   readonly Wine = Wine;
   readonly LeafyGreen = LeafyGreen;
+  readonly CalendarIcon = Calendar;
   private pickupApi = inject(PickupApi);
   private router = inject(Router);
   private authApi = inject(AuthApi);
@@ -35,6 +37,7 @@ export class Pickup {
 
   wasteType: 'paper' | 'glass' | 'organic' | 'plastic' = 'plastic';
   location: string = '';
+  targetDate: string = '';
   isLoading: boolean = false;
 
   async onCreatePickup() {
@@ -53,7 +56,12 @@ export class Pickup {
     this.isLoading = true;
 
     try {
-      const success = this.pickupApi.createPickup(currentUser.id, this.wasteType, this.location);
+      const success = this.pickupApi.createPickup(
+        currentUser.id,
+        this.wasteType,
+        this.location,
+        this.targetDate
+      );
 
       if (success) {
         this.toastService.success(
@@ -61,6 +69,7 @@ export class Pickup {
         );
         // Reset form
         this.location = '';
+        this.targetDate = '';
         this.wasteType = 'plastic';
       } else {
         this.toastService.error('Failed to create pickup request. Please try again.');

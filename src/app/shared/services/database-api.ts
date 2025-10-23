@@ -87,6 +87,7 @@ export class DatabaseApi {
                 location: '3, Jalan Jemuju Satu 16/13a, Seksyen 16, 40200 Shah Alam, Selangor',
                 created: new Date().toISOString(),
                 completed: null,
+                targetDate: new Date(Date.now() + 86400000).toISOString(), // Tomorrow
               },
               {
                 id: '7310855e-0953-4c5f-acb6-d2de4f697712',
@@ -96,6 +97,7 @@ export class DatabaseApi {
                   '20, 28, Jalan Jemuju Empat 16/13d, Seksyen 16, 40200 Shah Alam, Selangor',
                 created: new Date(Date.now() - 86400000 * 2).toISOString(), // 2 days ago,
                 completed: new Date(Date.now() - 86400000).toISOString(),
+                targetDate: new Date(Date.now() - 86400000).toISOString(), // Yesterday
               },
             ] as Pickup[];
             break;

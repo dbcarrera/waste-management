@@ -46,6 +46,20 @@
             />
           </div>
 
+          <div class="form-group">
+            <label for="targetDate">
+              <lucide-icon [img]="CalendarIcon" size="20"></lucide-icon>
+              Target Pickup Date
+            </label>
+            <input
+              type="date"
+              id="targetDate"
+              name="targetDate"
+              [(ngModel)]="targetDate"
+              [disabled]="isLoading"
+            />
+          </div>
+
           <div class="form-actions">
             <button class="btn-primary" type="submit" [disabled]="isLoading">
               {{ isLoading ? 'Creating Pickup...' : 'Schedule Pickup' }}
