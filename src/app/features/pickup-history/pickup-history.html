@@ -2,6 +2,34 @@
   <div class="header-section">
     <h2>Pickup History</h2>
     <p class="subtitle">Track and manage your waste collection requests</p>
+
+    <div class="date-filter">
+      <div class="date-inputs">
+        <div class="date-input-group">
+          <label for="start-date">Start Date</label>
+          <input
+            type="date"
+            id="start-date"
+            [value]="startDate()"
+            (change)="updateStartDate($event)"
+            class="date-input"
+          />
+        </div>
+        <div class="date-input-group">
+          <label for="end-date">End Date</label>
+          <input
+            type="date"
+            id="end-date"
+            [value]="endDate()"
+            (change)="updateEndDate($event)"
+            class="date-input"
+          />
+        </div>
+        <button class="clear-btn" (click)="clearFilters()" [disabled]="!startDate() && !endDate()">
+          Clear
+        </button>
+      </div>
+    </div>
   </div>
 
   <div class="table-wrapper">

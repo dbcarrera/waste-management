@@ -22,8 +22,82 @@
 .subtitle {
   color: #666;
   font-size: 15px;
-  margin: 0;
+  margin: 0 0 20px 0;
   font-weight: 400;
+}
+
+.date-filter {
+  margin-top: 20px;
+}
+
+.date-inputs {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.date-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.date-input-group label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.date-input {
+  padding: 8px 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: inherit;
+  color: #333;
+  background: white;
+  transition: all 0.3s ease;
+  outline: none;
+  cursor: pointer;
+}
+
+.date-input:hover {
+  border-color: var(--color-brand);
+}
+
+.date-input:focus {
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.clear-btn {
+  padding: 8px 20px;
+  border: 2px solid #e0e0e0;
+  background: white;
+  color: #666;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+  height: fit-content;
+}
+
+.clear-btn:hover:not(:disabled) {
+  border-color: #ff4444;
+  color: #ff4444;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.clear-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 .table-wrapper {
@@ -171,6 +245,25 @@ td {
 
   .header-section h2 {
     font-size: 24px;
+  }
+
+  .date-inputs {
+    justify-content: center;
+  }
+
+  .date-input-group {
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .date-input {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  .clear-btn {
+    font-size: 12px;
+    padding: 6px 16px;
   }
 
   table {

@@ -19,6 +19,27 @@ export class PickupApi {
     this.pickups().filter((pickup) => pickup.userId === (this.authApi.currentUser()?.id ?? ''))
   );
 
+  /**
+   * Filter pickups by custom date range
+   */
+  filterPickupsByCustomDateRange(pickups: Pickup[], startDate: string, endDate: string): Pickup[] {
+    let filtered = pickups;
+
+    if (startDate) {
+      const start = new Date(startDate);
+      start.setHours(0, 0, 0, 0);
+      filtered = filtered.filter((pickup) => new Date(pickup.created) >= start);
+    }
+
+    if (endDate) {
+      const end = new Date(endDate);
+      end.setHours(23, 59, 59, 999);
+      filtered = filtered.filter((pickup) => new Date(pickup.created) <= end);
+    }
+
+    return filtered;
+  }
+
   constructor() {
     let initialRun = true;
 
