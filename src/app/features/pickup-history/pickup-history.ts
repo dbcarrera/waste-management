@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { PickupService } from '../../shared/services/pickup';
-import { Auth } from '../../shared/services/auth';
+import { PickupApi } from '../../shared/services/pickup-api';
+import { AuthApi } from '../../shared/services/auth-api';
 import { DatePipe } from '@angular/common';
 import { ToastService } from '../../shared/services/toast';
 
@@ -12,16 +12,14 @@ import { ToastService } from '../../shared/services/toast';
   styleUrls: ['./pickup-history.css'],
 })
 export class Pickups {
-  private pickupsService = inject(PickupService);
-  private authService = inject(Auth);
+  private pickupApi = inject(PickupApi);
+  private authApi = inject(AuthApi);
   private toastService = inject(ToastService);
 
-  pickupHistory = this.authService.isAdmin()
-    ? this.pickupsService.allPickups
-    : this.pickupsService.userPickups;
+  pickupHistory = this.authApi.isAdmin() ? this.pickupApi.allPickups : this.pickupApi.userPickups;
 
   completePickup(pickupId: string): void {
-    const success = this.pickupsService.completePickup(pickupId);
+    const success = this.pickupApi.completePickup(pickupId);
     if (success) {
       this.toastService.success('Pickup completed successfully');
     } else {

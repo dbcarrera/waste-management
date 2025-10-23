@@ -1,6 +1,6 @@
 import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { DatabaseApi } from './database-api';
-import { Auth } from './auth';
+import { AuthApi } from './auth-api';
 import { Community } from '../../core/models/community';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -10,14 +10,14 @@ import { v4 as uuidv4 } from 'uuid';
 export class CommunityApi {
   // Signal to track all communities
   private communities = signal<Community[]>([]);
-  private databaseService = inject(DatabaseApi);
-  private authService = inject(Auth);
+  private databaseApi = inject(DatabaseApi);
+  private authApi = inject(AuthApi);
 
   // Public readonly signals
   allCommunities = this.communities.asReadonly();
   userCommunities = computed(() =>
     this.communities().find(
-      (community) => community.id === (this.authService.currentUser()?.communityId ?? '')
+      (community) => community.id === (this.authApi.currentUser()?.communityId ?? '')
     )
   );
 
@@ -40,11 +40,11 @@ export class CommunityApi {
 
   // TODO: Fetch from real API
   private fetchCommunities(): Community[] {
-    return this.databaseService.read<Community>('ewms_communities');
+    return this.databaseApi.read<Community>('ewms_communities');
   }
 
   private saveCommunities() {
-    this.databaseService.write<Community>('ewms_communities', this.communities());
+    this.databaseApi.write<Community>('ewms_communities', this.communities());
   }
 
   /**

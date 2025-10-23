@@ -2,21 +2,21 @@ import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { Pickup } from '../../core/models/pickup';
 import { DatabaseApi } from './database-api';
 import { v4 as uuidv4 } from 'uuid';
-import { Auth } from './auth';
+import { AuthApi } from './auth-api';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PickupService {
+export class PickupApi {
   // Signal to track all pickups
   private pickups = signal<Pickup[]>([]);
-  private databaseService = inject(DatabaseApi);
-  private authService = inject(Auth);
+  private databaseApi = inject(DatabaseApi);
+  private authApi = inject(AuthApi);
 
   // Public readonly signals
   allPickups = this.pickups.asReadonly();
   userPickups = computed(() =>
-    this.pickups().filter((pickup) => pickup.userId === (this.authService.currentUser()?.id ?? ''))
+    this.pickups().filter((pickup) => pickup.userId === (this.authApi.currentUser()?.id ?? ''))
   );
 
   constructor() {
@@ -38,11 +38,11 @@ export class PickupService {
 
   // TODO: Fetch from real API
   private fetchPickups(): Pickup[] {
-    return this.databaseService.read<Pickup>('ewms_pickups');
+    return this.databaseApi.read<Pickup>('ewms_pickups');
   }
 
   private savePickups() {
-    this.databaseService.write<Pickup>('ewms_pickups', this.pickups());
+    this.databaseApi.write<Pickup>('ewms_pickups', this.pickups());
   }
 
   /**

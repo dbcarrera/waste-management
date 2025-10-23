@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Auth } from '../../shared/services/auth';
+import { AuthApi } from '../../shared/services/auth-api';
 import { DatabaseApi } from '../../shared/services/database-api';
 import { ToastService } from '../../shared/services/toast';
 import { StatisticsReport } from '../../core/models/statistics-report';
@@ -18,14 +18,14 @@ import { Charts } from './components/charts/charts';
   styleUrl: './account.css',
 })
 export class Account {
-  private authService = inject(Auth);
-  private databaseService = inject(DatabaseApi);
-  private communityService = inject(CommunityApi);
+  private authApi = inject(AuthApi);
+  private databaseApi = inject(DatabaseApi);
+  private communityApi = inject(CommunityApi);
   private toastService = inject(ToastService);
   readonly Upload = Upload;
 
-  currentUser = this.authService.currentUser;
-  isAdmin = this.authService.isAdmin;
+  currentUser = this.authApi.currentUser;
+  isAdmin = this.authApi.isAdmin;
 
   // User profile fields
   username = signal('');
@@ -33,7 +33,7 @@ export class Account {
   selectedCommunityId = signal('');
 
   // Communities for selector
-  communities = this.communityService.allCommunities;
+  communities = this.communityApi.allCommunities;
 
   // Admin community creation
   newCommunityName = signal('');
@@ -127,12 +127,12 @@ export class Account {
       communityId: this.selectedCommunityId(),
     };
 
-    this.authService.updateUser(updatedUser);
+    this.authApi.updateUser(updatedUser);
 
     // Also update in the database
-    const allUsers = this.databaseService.read('ewms_users');
+    const allUsers = this.databaseApi.read('ewms_users');
     const updatedUsers = allUsers.map((u: any) => (u.id === user.id ? updatedUser : u));
-    this.databaseService.write('ewms_users', updatedUsers);
+    this.databaseApi.write('ewms_users', updatedUsers);
 
     this.toastService.success('Profile updated successfully!');
   }
@@ -153,7 +153,7 @@ export class Account {
       return;
     }
 
-    const success = this.communityService.createCommunity(
+    const success = this.communityApi.createCommunity(
       this.newCommunityName(),
       this.newCommunityLocation()
     );
@@ -168,8 +168,8 @@ export class Account {
   }
 
   generateReport() {
-    const allPickups = this.databaseService.read<Pickup>('ewms_pickups');
-    const allIssues = this.databaseService.read<Issue>('ewms_issues');
+    const allPickups = this.databaseApi.read<Pickup>('ewms_pickups');
+    const allIssues = this.databaseApi.read<Issue>('ewms_issues');
 
     const report: StatisticsReport = {
       created: new Date().toISOString(),
@@ -210,6 +210,6 @@ export class Account {
   }
 
   signOut() {
-    this.authService.logout();
+    this.authApi.logout();
   }
 }

@@ -1,8 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NotificationsService } from './services/notifications.service';
-import { Auth } from '../../shared/services/auth';
+import { NotificationsApi } from './services/notifications-api';
+import { AuthApi } from '../../shared/services/auth-api';
 import { DatabaseApi } from '../../shared/services/database-api';
 import { Community } from '../../core/models/community';
 import { AppNotification } from '../../core/models/app-notification';
@@ -15,15 +15,15 @@ import { AppNotification } from '../../core/models/app-notification';
   styleUrl: './notifications.css',
 })
 export class Notifications {
-  private notificationsService = inject(NotificationsService);
-  private authService = inject(Auth);
-  private databaseService = inject(DatabaseApi);
+  private notificationsApi = inject(NotificationsApi);
+  private authApi = inject(AuthApi);
+  private databaseApi = inject(DatabaseApi);
 
-  isAdmin = this.authService.isAdmin;
-  currentUser = this.authService.currentUser;
+  isAdmin = this.authApi.isAdmin;
+  currentUser = this.authApi.currentUser;
   notifications = this.isAdmin()
-    ? this.notificationsService.allNotifications
-    : this.notificationsService.userNotifications;
+    ? this.notificationsApi.allNotifications
+    : this.notificationsApi.userNotifications;
 
   // Form state for creating notifications
   showCreateForm = signal(false);
@@ -39,7 +39,7 @@ export class Notifications {
 
   constructor() {
     // Load communities for admin dropdown
-    this.communities.set(this.databaseService.read<Community>('ewms_communities'));
+    this.communities.set(this.databaseApi.read<Community>('ewms_communities'));
   }
 
   toggleCreateForm() {
@@ -55,7 +55,7 @@ export class Notifications {
       return;
     }
 
-    this.notificationsService.addNotification({
+    this.notificationsApi.addNotification({
       title: this.newNotification.title,
       message: this.newNotification.message,
       priority: this.newNotification.priority,
@@ -75,6 +75,6 @@ export class Notifications {
   }
 
   markAsCompleted(notification: any) {
-    this.notificationsService.markAsCompleted(notification);
+    this.notificationsApi.markAsCompleted(notification);
   }
 }

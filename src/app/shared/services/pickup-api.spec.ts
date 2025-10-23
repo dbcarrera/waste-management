@@ -1,13 +1,12 @@
 import { TestBed } from '@angular/core/testing';
+import { PickupApi } from './pickup-api';
 
-import { Auth } from './auth';
-
-describe('Auth', () => {
-  let service: Auth;
+describe('PickupApi', () => {
+  let service: PickupApi;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(Auth);
+    service = TestBed.inject(PickupApi);
   });
 
   it('should be created', () => {

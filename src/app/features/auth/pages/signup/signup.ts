@@ -4,7 +4,7 @@ import { FrostedCard } from '../../../../shared/components/frosted-card/frosted-
 import { Card } from '../../../../shared/components/card/card';
 import { Footer } from '../../../../shared/components/footer/footer';
 import { CalendarCheck, ChartColumn, Bell, History, LucideAngularModule } from 'lucide-angular';
-import { Auth } from '../../../../shared/services/auth';
+import { AuthApi } from '../../../../shared/services/auth-api';
 import { Router } from '@angular/router';
 import { CommunityApi } from '../../../../shared/services/community-api';
 import { ToastService } from '../../../../shared/services/toast';
@@ -16,9 +16,9 @@ import { ToastService } from '../../../../shared/services/toast';
   styleUrl: './signup.css',
 })
 export class Signup {
-  private authService = inject(Auth);
+  private authApi = inject(AuthApi);
   private router = inject(Router);
-  private communityService = inject(CommunityApi);
+  private communityApi = inject(CommunityApi);
   private toastService = inject(ToastService);
 
   readonly CalendarCheck = CalendarCheck;
@@ -34,7 +34,7 @@ export class Signup {
   isLoading: boolean = false;
 
   // Communities for dropdown
-  communities = this.communityService.allCommunities;
+  communities = this.communityApi.allCommunities;
 
   async onSignup() {
     // Validation
@@ -66,7 +66,7 @@ export class Signup {
     this.errorMessage = '';
 
     try {
-      const success = await this.authService.signup(
+      const success = await this.authApi.signup(
         this.email,
         this.password,
         this.selectedCommunityId

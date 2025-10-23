@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FrostedCard } from '../../../../shared/components/frosted-card/frosted-card';
 import { FormsModule } from '@angular/forms';
-import { Auth } from '../../../../shared/services/auth';
+import { AuthApi } from '../../../../shared/services/auth-api';
 import { Router } from '@angular/router';
 import { ToastService } from '../../../../shared/services/toast';
 
@@ -12,7 +12,7 @@ import { ToastService } from '../../../../shared/services/toast';
   styleUrl: './login.css',
 })
 export class Login {
-  private authService = inject(Auth);
+  private authApi = inject(AuthApi);
   private router = inject(Router);
   private toastService = inject(ToastService);
 
@@ -31,7 +31,7 @@ export class Login {
     this.isLoading = true;
 
     try {
-      const success = await this.authService.login(this.email, this.password);
+      const success = await this.authApi.login(this.email, this.password);
 
       if (success) {
         this.router.navigate(['/pickup']);

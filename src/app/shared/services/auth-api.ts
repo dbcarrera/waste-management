@@ -6,9 +6,9 @@ import { DatabaseApi } from './database-api';
 @Injectable({
   providedIn: 'root',
 })
-export class Auth {
+export class AuthApi {
   private router = inject(Router);
-  private databaseService = inject(DatabaseApi);
+  private databaseApi = inject(DatabaseApi);
 
   // The current user state
   private currentUserSignal = signal<User | null>(null);
@@ -28,12 +28,12 @@ export class Auth {
   // TODO: REMOVE once backend is implemented, as this is fake data
   // TODO: When MongoDB is used, do not access all users on the client.
   private fetchUsers(): User[] {
-    return this.databaseService.read<User>('ewms_users');
+    return this.databaseApi.read<User>('ewms_users');
   }
 
   // TODO: Not needed when users are stored on backend
   private addUser(user: User) {
-    this.databaseService.write<User>('ewms_users', [...this.fetchUsers(), user]);
+    this.databaseApi.write<User>('ewms_users', [...this.fetchUsers(), user]);
   }
 
   // TODO: User auth API keys may be stored on client, however it depends on MongoDB implementation

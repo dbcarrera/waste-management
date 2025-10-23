@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PickupService } from '../../shared/services/pickup';
-import { Auth } from '../../shared/services/auth';
+import { PickupApi } from '../../shared/services/pickup-api';
+import { AuthApi } from '../../shared/services/auth-api';
 import { CommonModule } from '@angular/common';
 import {
   Trash2,
@@ -28,9 +28,9 @@ export class Pickup {
   readonly Package = Package;
   readonly Wine = Wine;
   readonly LeafyGreen = LeafyGreen;
-  private pickupService = inject(PickupService);
+  private pickupApi = inject(PickupApi);
   private router = inject(Router);
-  private authService = inject(Auth);
+  private authApi = inject(AuthApi);
   private toastService = inject(ToastService);
 
   wasteType: 'paper' | 'glass' | 'organic' | 'plastic' = 'plastic';
@@ -44,7 +44,7 @@ export class Pickup {
       return;
     }
 
-    const currentUser = this.authService.currentUser();
+    const currentUser = this.authApi.currentUser();
     if (!currentUser) {
       this.toastService.error('You must be logged in to create a pickup');
       return;
@@ -53,11 +53,7 @@ export class Pickup {
     this.isLoading = true;
 
     try {
-      const success = this.pickupService.createPickup(
-        currentUser.id,
-        this.wasteType,
-        this.location
-      );
+      const success = this.pickupApi.createPickup(currentUser.id, this.wasteType, this.location);
 
       if (success) {
         this.toastService.success(

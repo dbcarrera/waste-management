@@ -1,12 +1,12 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { Auth } from '../services/auth';
+import { AuthApi } from '../services/auth-api';
 
 export const noAuthGuard: CanActivateFn = () => {
-  const authService = inject(Auth);
+  const authApi = inject(AuthApi);
   const router = inject(Router);
 
-  if (!authService.isAuthenticated()) {
+  if (!authApi.isAuthenticated()) {
     return true;
   }
 

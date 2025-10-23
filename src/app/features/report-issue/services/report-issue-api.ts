@@ -1,14 +1,14 @@
 import { Injectable, inject, signal, computed } from '@angular/core';
 import { Issue } from '../../../core/models/issue';
 import { DatabaseApi } from '../../../shared/services/database-api';
-import { Auth } from '../../../shared/services/auth';
+import { AuthApi } from '../../../shared/services/auth-api';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ReportIssue {
-  private databaseService = inject(DatabaseApi);
-  private authService = inject(Auth);
+export class ReportIssueApi {
+  private databaseApi = inject(DatabaseApi);
+  private authApi = inject(AuthApi);
 
   // Signal for issues list
   private issuesSignal = signal<Issue[]>([]);
@@ -18,7 +18,7 @@ export class ReportIssue {
 
   // Computed property for current user's issues
   userIssues = computed(() => {
-    const currentUser = this.authService.currentUser();
+    const currentUser = this.authApi.currentUser();
     if (!currentUser) return [];
     return this.issuesSignal().filter((issue) => issue.userId === currentUser.id);
   });
@@ -32,7 +32,7 @@ export class ReportIssue {
    */
   private loadIssues(): void {
     try {
-      const issues = this.databaseService.read<Issue>('ewms_issues');
+      const issues = this.databaseApi.read<Issue>('ewms_issues');
       this.issuesSignal.set(issues);
     } catch (error) {
       console.error('Error loading issues:', error);
@@ -65,7 +65,7 @@ export class ReportIssue {
     issueMessage: string
   ): Promise<boolean> {
     try {
-      const currentUser = this.authService.currentUser();
+      const currentUser = this.authApi.currentUser();
       if (!currentUser) {
         console.error('No authenticated user found');
         return false;
@@ -86,7 +86,7 @@ export class ReportIssue {
       };
 
       const updatedIssues = [...this.issuesSignal(), newIssue];
-      this.databaseService.write<Issue>('ewms_issues', updatedIssues);
+      this.databaseApi.write<Issue>('ewms_issues', updatedIssues);
       this.issuesSignal.set(updatedIssues);
 
       return true;
@@ -118,7 +118,7 @@ export class ReportIssue {
         ...updates,
       };
 
-      this.databaseService.write<Issue>('ewms_issues', updatedIssues);
+      this.databaseApi.write<Issue>('ewms_issues', updatedIssues);
       this.issuesSignal.set(updatedIssues);
 
       return true;
@@ -136,7 +136,7 @@ export class ReportIssue {
   deleteIssue(id: string): boolean {
     try {
       const updatedIssues = this.issuesSignal().filter((issue) => issue.id !== id);
-      this.databaseService.write<Issue>('ewms_issues', updatedIssues);
+      this.databaseApi.write<Issue>('ewms_issues', updatedIssues);
       this.issuesSignal.set(updatedIssues);
 
       return true;

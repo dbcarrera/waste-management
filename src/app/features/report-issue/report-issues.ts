@@ -2,9 +2,9 @@ import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { DatePipe } from '@angular/common';
-import { ReportIssue } from './services/report-issue';
+import { ReportIssueApi } from './services/report-issue-api';
 import { Issue } from '../../core/models/issue';
-import { Auth } from '../../shared/services/auth';
+import { AuthApi } from '../../shared/services/auth-api';
 import { ToastService } from '../../shared/services/toast';
 
 @Component({
@@ -15,8 +15,8 @@ import { ToastService } from '../../shared/services/toast';
   styleUrls: ['./report-issues.css'],
 })
 export class ReportIssues {
-  private reportIssueService = inject(ReportIssue);
-  private authService = inject(Auth);
+  private reportIssueApi = inject(ReportIssueApi);
+  private authApi = inject(AuthApi);
   private toastService = inject(ToastService);
 
   // Form fields
@@ -27,11 +27,11 @@ export class ReportIssues {
   isSubmitting: boolean = false;
 
   // Admin access
-  isAdmin = this.authService.isAdmin;
-  allIssues = this.reportIssueService.allIssues;
+  isAdmin = this.authApi.isAdmin;
+  allIssues = this.reportIssueApi.allIssues;
 
   completeIssue(issueId: string): void {
-    const success = this.reportIssueService.updateIssue(issueId, {
+    const success = this.reportIssueApi.updateIssue(issueId, {
       completed: new Date().toISOString(),
     });
     if (success) {
@@ -50,7 +50,7 @@ export class ReportIssues {
     this.isSubmitting = true;
 
     try {
-      const success = await this.reportIssueService.createIssue(
+      const success = await this.reportIssueApi.createIssue(
         this.issueType as Issue['issueType'],
         this.issueMessage
       );

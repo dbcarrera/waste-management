@@ -1,7 +1,7 @@
 import { Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { Auth } from '../../services/auth';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthApi } from '../../services/auth-api';
 import {
   LucideAngularModule,
   Calendar,
@@ -28,7 +28,7 @@ interface NavItem {
   styleUrl: './navigation.css',
 })
 export class Navigation {
-  private authService = inject(Auth);
+  private authApi = inject(AuthApi);
 
   // Icons
   Calendar = Calendar;
@@ -48,7 +48,7 @@ export class Navigation {
   ];
 
   visibleNavItems = computed(() => {
-    const isAdmin = this.authService.isAdmin();
+    const isAdmin = this.authApi.isAdmin();
     return this.navItems.filter((item) => !item.adminOnly || isAdmin);
   });
 }
