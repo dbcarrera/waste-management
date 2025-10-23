@@ -5,6 +5,7 @@ import { DatePipe } from '@angular/common';
 import { ReportIssue } from './services/report-issue';
 import { Issue } from '../../core/models/issue';
 import { Auth } from '../../shared/services/auth';
+import { ToastService } from '../../shared/services/toast';
 
 @Component({
   selector: 'app-report-issues',
@@ -16,15 +17,14 @@ import { Auth } from '../../shared/services/auth';
 export class ReportIssues {
   private reportIssueService = inject(ReportIssue);
   private authService = inject(Auth);
+  private toastService = inject(ToastService);
 
   // Form fields
   issueType: Issue['issueType'] | '' = '';
   issueMessage: string = '';
 
-  // UI state
-  submitted: boolean = false;
+  // UI loading state
   isSubmitting: boolean = false;
-  errorMessage: string = '';
 
   // Admin access
   isAdmin = this.authService.isAdmin;
@@ -35,21 +35,19 @@ export class ReportIssues {
       completed: new Date().toISOString(),
     });
     if (success) {
-      console.log('Issue marked as completed successfully');
+      this.toastService.success('Issue marked as completed successfully');
     } else {
-      console.error('Failed to mark issue as completed');
+      this.toastService.error('Failed to mark issue as completed');
     }
   }
 
   async submitIssue() {
     if (this.issueType === '' || this.issueMessage.trim() === '') {
-      this.errorMessage = 'Please fill in all required fields.';
+      this.toastService.error('Please fill in all required fields.');
       return;
     }
 
     this.isSubmitting = true;
-    this.errorMessage = '';
-    this.submitted = false;
 
     try {
       const success = await this.reportIssueService.createIssue(
@@ -58,15 +56,15 @@ export class ReportIssues {
       );
 
       if (success) {
-        this.submitted = true;
+        this.toastService.success('Thank you for your report, we will look into it!');
         this.issueType = '';
         this.issueMessage = '';
       } else {
-        this.errorMessage = 'Failed to submit the issue. Please make sure you are logged in.';
+        this.toastService.error('Failed to submit the issue. Please make sure you are logged in.');
       }
     } catch (error) {
       console.error('Error submitting issue:', error);
-      this.errorMessage = 'An unexpected error occurred. Please try again.';
+      this.toastService.error('An unexpected error occurred. Please try again.');
     } finally {
       this.isSubmitting = false;
     }
@@ -76,7 +74,6 @@ export class ReportIssues {
     form.resetForm();
     this.issueType = '';
     this.issueMessage = '';
-    this.submitted = false;
-    this.errorMessage = '';
+    this.isSubmitting = false;
   }
 }

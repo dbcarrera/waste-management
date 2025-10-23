@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { PickupService } from '../../shared/services/pickup';
 import { Auth } from '../../shared/services/auth';
 import { DatePipe } from '@angular/common';
+import { ToastService } from '../../shared/services/toast';
 
 @Component({
   selector: 'app-pickups',
@@ -13,6 +14,7 @@ import { DatePipe } from '@angular/common';
 export class Pickups {
   private pickupsService = inject(PickupService);
   private authService = inject(Auth);
+  private toastService = inject(ToastService);
 
   pickupHistory = this.authService.isAdmin()
     ? this.pickupsService.allPickups
@@ -21,9 +23,9 @@ export class Pickups {
   completePickup(pickupId: string): void {
     const success = this.pickupsService.completePickup(pickupId);
     if (success) {
-      console.log('Pickup completed successfully');
+      this.toastService.success('Pickup completed successfully');
     } else {
-      console.error('Failed to complete pickup');
+      this.toastService.error('Failed to complete pickup');
     }
   }
 }

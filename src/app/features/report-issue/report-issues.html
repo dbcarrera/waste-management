@@ -111,22 +111,4 @@
       Submitting... } @else { Submit Issue }
     </button>
   </form>
-
-  @if (submitted) {
-  <div class="success-message">
-    <div class="success-icon">✓</div>
-    <div class="success-content">
-      <h3>Issue Reported Successfully!</h3>
-      <p>Thank you for your report. We'll look into this as soon as possible.</p>
-    </div>
-  </div>
-  } @if (errorMessage) {
-  <div class="error-message">
-    <div class="error-icon">⚠</div>
-    <div class="error-content">
-      <h3>Submission Failed</h3>
-      <p>{{ errorMessage }}</p>
-    </div>
-  </div>
-  }
 </div>

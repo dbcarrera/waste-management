@@ -13,6 +13,7 @@ import {
   LeafyGreen,
   LucideAngularModule,
 } from 'lucide-angular';
+import { ToastService } from '../../shared/services/toast';
 
 @Component({
   selector: 'app-pickup',
@@ -30,31 +31,26 @@ export class Pickup {
   private pickupService = inject(PickupService);
   private router = inject(Router);
   private authService = inject(Auth);
+  private toastService = inject(ToastService);
 
   wasteType: 'paper' | 'glass' | 'organic' | 'plastic' = 'plastic';
   location: string = '';
-  errorMessage: string = '';
-  successMessage: string = '';
   isLoading: boolean = false;
 
   async onCreatePickup() {
     // Validation
     if (!this.location.trim()) {
-      this.errorMessage = 'Please enter a pickup location';
-      this.successMessage = '';
+      this.toastService.error('Please enter a pickup location');
       return;
     }
 
     const currentUser = this.authService.currentUser();
     if (!currentUser) {
-      this.errorMessage = 'You must be logged in to create a pickup';
-      this.successMessage = '';
+      this.toastService.error('You must be logged in to create a pickup');
       return;
     }
 
     this.isLoading = true;
-    this.errorMessage = '';
-    this.successMessage = '';
 
     try {
       const success = this.pickupService.createPickup(
@@ -64,16 +60,17 @@ export class Pickup {
       );
 
       if (success) {
-        this.successMessage = `Pickup request created successfully! We'll collect your ${this.wasteType} waste from ${this.location}.`;
+        this.toastService.success(
+          `Pickup request created successfully! We'll collect your ${this.wasteType} waste from ${this.location}.`
+        );
         // Reset form
         this.location = '';
         this.wasteType = 'plastic';
       } else {
-        this.errorMessage = 'Failed to create pickup request. Please try again.';
+        this.toastService.error('Failed to create pickup request. Please try again.');
       }
     } catch (error) {
-      console.error('Pickup creation error:', error);
-      this.errorMessage = 'An error occurred while creating the pickup request.';
+      this.toastService.error('An error occurred while creating the pickup request.');
     } finally {
       this.isLoading = false;
     }

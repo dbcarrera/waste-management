@@ -62,8 +62,6 @@ export class PickupService {
       const currentPickups = this.pickups();
       const updatedPickups = [...currentPickups, newPickup];
 
-      console.log('Creating pickup:', updatedPickups);
-
       this.pickups.set(updatedPickups);
 
       return true;

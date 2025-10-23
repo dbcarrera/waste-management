@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { FrostedCard } from '../../../../shared/components/frosted-card/frosted-card';
 import { FormsModule } from '@angular/forms';
-import { Header } from '../../../../shared/components/header/header';
 import { Auth } from '../../../../shared/services/auth';
 import { Router } from '@angular/router';
+import { ToastService } from '../../../../shared/services/toast';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 export class Login {
   private authService = inject(Auth);
   private router = inject(Router);
+  private toastService = inject(ToastService);
+
   email: string = '';
   password: string = '';
   errorMessage: string = '';
@@ -22,11 +24,11 @@ export class Login {
   async onLogin() {
     if (!this.email || !this.password) {
       this.errorMessage = 'Please enter both email and password';
+      this.toastService.error(this.errorMessage);
       return;
     }
 
     this.isLoading = true;
-    this.errorMessage = '';
 
     try {
       const success = await this.authService.login(this.email, this.password);
@@ -35,10 +37,11 @@ export class Login {
         this.router.navigate(['/pickup']);
       } else {
         this.errorMessage = 'Incorrect email and password combination';
+        this.toastService.error(this.errorMessage);
       }
     } catch (error) {
-      console.error('Login error:', error);
       this.errorMessage = 'An error occurred during login. Please try again.';
+      this.toastService.error(this.errorMessage);
     } finally {
       this.isLoading = false;
     }
