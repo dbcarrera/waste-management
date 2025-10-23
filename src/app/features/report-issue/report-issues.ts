@@ -63,7 +63,6 @@ export class ReportIssues {
         this.toastService.error('Failed to submit the issue. Please make sure you are logged in.');
       }
     } catch (error) {
-      console.error('Error submitting issue:', error);
       this.toastService.error('An unexpected error occurred. Please try again.');
     } finally {
       this.isSubmitting = false;

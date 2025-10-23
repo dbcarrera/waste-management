@@ -80,7 +80,6 @@ export class Signup {
         this.toastService.error(this.errorMessage);
       }
     } catch (error) {
-      console.error('Signup error:', error);
       this.errorMessage = 'An error occurred during signup. Please try again.';
       this.toastService.error(this.errorMessage);
     } finally {
