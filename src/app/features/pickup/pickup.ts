@@ -39,11 +39,23 @@ export class Pickup {
   location: string = '';
   targetDate: string = '';
   isLoading: boolean = false;
+  // Ensure the user doesn't pick a date in the past.
+  minAllowedDate: string = new Date().toISOString().split('T')[0];
 
   async onCreatePickup() {
     // Validation
     if (!this.location.trim()) {
       this.toastService.error('Please enter a pickup location');
+      return;
+    }
+
+    if (!this.targetDate) {
+      this.toastService.error('Please select a target pickup date');
+      return;
+    }
+
+    if (new Date(this.targetDate) < new Date(this.minAllowedDate)) {
+      this.toastService.error('The target pickup date cannot be in the past');
       return;
     }
 

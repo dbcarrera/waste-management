@@ -49,14 +49,16 @@
           <div class="form-group">
             <label for="targetDate">
               <lucide-icon [img]="CalendarIcon" size="20"></lucide-icon>
-              Target Pickup Date
+              Target Pickup Date (MM/DD/YYYY)
             </label>
             <input
               type="date"
               id="targetDate"
               name="targetDate"
               [(ngModel)]="targetDate"
+              required
               [disabled]="isLoading"
+              [min]="minAllowedDate"
             />
           </div>
 
