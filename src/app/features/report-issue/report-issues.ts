@@ -6,15 +6,17 @@ import { ReportIssueApi } from './services/report-issue-api';
 import { Issue } from '../../core/models/issue';
 import { AuthApi } from '../../shared/services/auth-api';
 import { ToastService } from '../../shared/services/toast';
+import { ChevronDown, LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-report-issues',
   standalone: true,
-  imports: [FormsModule, RouterModule, DatePipe],
+  imports: [FormsModule, RouterModule, DatePipe, LucideAngularModule],
   templateUrl: './report-issues.html',
   styleUrls: ['./report-issues.css'],
 })
 export class ReportIssues {
+  readonly ChevronDown = ChevronDown;
   private reportIssueApi = inject(ReportIssueApi);
   private authApi = inject(AuthApi);
   private toastService = inject(ToastService);
