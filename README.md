@@ -4,6 +4,14 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 
 This is for DIP 224 assignment.
 
+## Install Dependencies
+
+Upon cloning (or downloading zipped), you will need to install dependencies. Go into your project directory and run:
+
+```bash
+npm install
+```
+
 ## Development server
 
 To start a local development server, run:
